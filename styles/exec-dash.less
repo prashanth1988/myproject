@@ -1,0 +1,398 @@
+@axisColor: #efefef;
+@yAxisLabelColor: #b2b2b2;
+@xAxisLabelColor: #43474d;
+@chartPurple: #7f799b;
+@chartBlue: #89c0d7;
+
+#execDash {
+  .col-sm-4 {
+    padding: 0 20px 20px 0;
+
+    &:nth-child(3n) {
+      padding-right: 0;
+    }
+    .exec-dash-tile {
+      cursor: pointer;
+      background: #fff;
+      border-radius: @border-radius-base;
+      border: 1px solid #cbcbcb;
+      border-width: 0 1px 2px;
+      padding: 12px;
+      overflow: hidden;
+      height: 331px;
+      h2 {
+        font-size: 15px;
+        color: @gray-dark;
+        display: inline-block;
+      }
+      .report-link {
+        color: @gray-light;
+        font-size: 13px;
+        font-style: italic;
+        font-weight: @light;
+        float: right;
+      }
+      .tile-chart {
+        .box-sizing();
+        svg {
+          text {
+            font-family: @font-family-sans-serif;
+            font-weight: @light;
+          }
+        }
+        .exec-dash-bar-chart {
+          svg {
+            .nv-axis {
+              &.nv-x {
+                .nv-wrap.nv-axis {
+                  .tick {
+                    path.domain {
+                      stroke: @axisColor;
+                    }
+                    text {
+                      fill: @xAxisLabelColor;
+                      .translate(0, 5px);
+                      font-size: 13px;
+                      fill-opacity: 0;
+                      tspan {
+                        fill-opacity: 1;
+                      }
+                    }
+                  }
+                }
+              }
+              &.nv-y {
+                path.domain {
+                }
+                .nv-wrap.nv-axis {
+                  .tick, .nv-axisMaxMin {
+                    text {
+                      fill: @yAxisLabelColor;
+                      font-weight: normal;
+                      .translate(-5px);
+                      font-weight: @light;
+                    }
+                  }
+                  path.domain {
+                    stroke: @axisColor;
+                  }
+                }
+              }
+            }
+            .nv-discreteBarWithAxes {
+              .translate(0, -20px);
+              .nv-x.nv-axis {
+                .tick {
+                  line {
+                    display: none;
+                  }
+                }
+              }
+              .nv-y.nv-axis {
+                .nv-wrap.nv-axis {
+                  path.domain {
+                    display: none !important;
+                  }
+                }
+              }
+            }
+            .nv-barsWrap {
+              .nv-axis {
+                &.nv-x {
+                  .nv-wrap.nv-axis {
+                    .tick {
+                      line {
+                        display: none;
+                      }
+                    }
+                    path.domain {
+                      stroke: @axisColor;
+                    }
+                  }
+                }
+                &.nv-y {
+
+                }
+              }
+              .nv-discretebar {
+                .nv-group {
+                  .nv-bar {
+                    rect {
+                      fill-opacity: 1;
+                    }
+                    text {
+                      font-size: 22px;
+                    }
+                    &.positive {
+                      text {
+                        .translate(0, -7px);
+                      }
+                    }
+                    &.negative {
+                      text {
+                        .translate(0, 9px);
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            .nv-pieWrap {
+              .transform(scale(0.98) translate(0, -32px));
+              .nv-pieLabels {
+                .nv-label {
+                  rect {
+                    .transform(scaleX(0.6));
+                    fill-opacity: 1;
+                  }
+                  text {
+                    font-size: 17px;
+                    .translate(0, 0.5em);
+                  }
+                }
+              }
+            }
+          }
+          &#open-invoices-tile {
+            svg {
+              .nv-barsWrap {
+                .nv-discretebar {
+                  .nv-group {
+                    rect, text {
+                      fill: @chartPurple;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          &#overdue-milestones-tile {
+            svg {
+              .nv-barsWrap {
+                .nv-discretebar {
+                  .nv-group {
+                    rect, text {
+                      fill: @chartBlue;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          &#pda-queue-tile, &#open-orders-tile {
+            position: relative;
+            display: block;
+            margin: auto;
+            svg {
+              height: 290px;
+              .nv-legendWrap {
+                .translate(10px, 225px);
+              }
+              .nv-pieWrap {
+                .nv-pie {
+                  .nv-slice {
+                    .transform(scale(0.95) translate(0,0));
+                    path {
+                      stroke-width: 0;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          &#pda-queue-tile {
+            .nv-pieWrap {
+              .nv-pieLabels {
+                .nv-label {
+                  &:first-child {
+                    rect, text {
+                      fill: #5F5F5F !important;
+                    }
+                  }
+                  &:last-child {
+                    rect, text {
+                      fill: #7BCEBA !important;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          &#open-orders-tile {
+            .nv-pieWrap {
+              .nv-pieLabels {
+                .nv-label {
+                  &:first-child {
+                    rect, text {
+                      fill: #7a7a7a !important;
+                    }
+                  }
+                  &:last-child {
+                    rect, text {
+                      fill: #FFE47D !important;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          &#new-leads-tile, &#closed-sales-tile {
+            position: relative;
+            display: block;
+            margin: auto;
+            .tile-chart {
+              padding-top: 0px;
+            }
+            svg {
+              height: 270px;
+              margin-top: 10px;
+              .nv-legendWrap {
+                .translate(-30px, 210px);
+              }
+              .nv-axis {
+                &.nv-x {
+                  .nv-wrap.nv-axis {
+                    .tick, .nv-axisMaxMin {
+                      line {
+                      }
+                      text {
+                        fill: @yAxisLabelColor;
+                        font-weight: normal;
+                        .translate(-5px, 5px);
+                        font-weight: @light;
+                      }
+                    }
+                    >g:nth-child(2){
+                      .translate(48px);
+                    }
+                  }
+                }
+                &.nv-y {
+                  .nv-wrap.nv-axis {
+                    .tick, .nv-axisMaxMin {
+                      text {
+                        fill: @yAxisLabelColor;
+                        font-weight: normal;
+                        .translate(-5px);
+                        font-weight: @light;
+                      }
+                    }
+                  }
+                }
+              }
+              .nv-linesWrap {
+                .nv-line {
+                  path.nv-line {
+                    stroke-width: 2.5px;
+                  }
+                }
+              }
+            }
+          }
+        }
+        div.empty-state {
+          div.empty-state-icon-container {
+            height: 80px;
+            width: 80px;
+            margin: auto;
+            margin-top: 85px;
+            img {
+
+            }
+          }
+          div.empty-state-message-container {
+            width: 100%;
+            margin-top: 20px;
+            span {
+              font-size: 18px;
+              line-height: 20px;
+              font-family: @font-family-sans-serif;
+              font-weight: @light;
+              text-align: center;
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1345px) {
+  #execDash {
+    .col-sm-4 .exec-dash-tile .tile-chart {
+      .exec-dash-bar-chart {
+        svg {
+          .nv-axis {
+            &.nv-x {
+              .nv-wrap.nv-axis {
+                .tick {
+                  text {
+                    font-size: 11px;
+                  }
+                }
+              }
+            }
+          }
+          .nv-barsWrap .nv-discretebar {
+            .nv-group {
+              .nv-bar {
+                text {
+                  font-size: 14px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1110px) {
+  #execDash {
+    .col-sm-4 .exec-dash-tile .tile-chart {
+      .exec-dash-bar-chart {
+        svg {
+          .nv-axis {
+            &.nv-x {
+              .nv-wrap.nv-axis {
+                .tick {
+                  text {
+                    font-size: 9px;
+                  }
+                }
+              }
+            }
+          }
+        }
+        &#open-orders-tile, &#pda-queue-tile {
+          svg {
+            .nv-legendWrap {
+              text {
+                font-size: 11px;
+              }
+            }
+            .nv-pieWrap {
+              .transform(translate(0px, -50px));
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  #execDash {
+    .exec-dash-bar-chart {
+      &#open-orders-tile {
+        svg {
+          .nv-legendWrap {
+            .translate(5px, 190px) !important;
+          }
+        }
+      }
+    }
+  }
+}

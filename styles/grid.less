@@ -1,0 +1,705 @@
+@blue-text: #e1eff9;
+@dkblue-text: #43474d;
+@grid-bg: #fafafa;
+@grid-border: #dfdfdf;
+@grid-text : #272727;
+@input-border: fade(@dkblue-text, 20%);
+
+.grid-label {
+  margin: 30px 0 15px;
+}
+
+.spinner.grid-spinner {
+  position: absolute;
+  top: 250px;
+  left: 50%;
+  margin-left: -56px;
+  z-index: 100;
+}
+
+.select2-container {
+
+  margin-right: 0;
+  float: right;
+  position: relative;
+  top: -5px;
+  z-index: 100;
+  width: 480px;
+  height: 30px;
+  &.select2-container-active {
+    .select2-choice {
+      border-color: #c5c5c7;
+      .box-shadow(none);
+    }
+
+  }
+  .select2-choice {
+    border: 2px solid #c5c5c7;
+    border-radius: @border-radius-base;
+    height: 40px;
+    color: @dkblue-text;
+    background: #fff none no-repeat;
+    padding: 6px 18px 0;
+    .select2-chosen {
+    }
+    .select2-arrow {
+      border-left: 0 none transparent;
+      background: none transparent no-repeat !important;
+      b {
+        padding-top: 12px;
+        position: relative;
+        right: 5px;
+        font-size: 12px;
+        background-image: none !important;
+        .font-awesome("\f078");
+      }
+    }
+  }
+  &.select2-dropdown-open {
+    &.select2-drop-above {
+      .select2-choice {
+        border-width: 0 2px 2px;
+      }
+    }
+    .select2-choice {
+      background-image: none;
+    }
+    .select2-arrow {
+      b {
+        .font-awesome("\f077");
+      }
+    }
+  }
+}
+
+.select2-drop-mask {
+  display: none;
+  z-index: -1;
+}
+
+.select2-drop {
+  margin-top: 8px;
+  border-color: #c5c5c7;
+  border-width: 2px;
+  &.select2-drop-above.select2-drop-active {
+    border-top: 2px solid @input-border;
+    .box-shadow(0 0 2px rgba(0, 0, 0, 0.05));
+  }
+  .select2-search {
+    display: none;
+  }
+  ul.select2-results {
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid #ececec;
+    li {
+      margin: 0;
+      padding: 6px 11px;
+      border-bottom: 1px solid #ececec;
+      color: @dkblue-text;
+      &:last-child {
+        border-bottom-right-radius: @border-radius-base;
+        border-bottom-left-radius: @border-radius-base;
+      }
+      &.select2-highlighted, &:hover {
+        background-color: #f5f5f5;
+      }
+    }
+  }
+  &.pagesize-selection {
+    border-color: @input-border;
+    margin-top: 0;
+    ul {
+      li {
+        .select2-result-label {
+          font-size: 12px;
+          padding: 0;
+          font-weight: @extralight;
+        }
+      }
+    }
+  }
+}
+
+.dash-grid {
+  .border-radius(0 @border-radius-base 0 0);
+  border-color: #cbcbcb;
+  border-style: solid;
+  border-width: 0 0 0 1px;
+  min-width: 600px;
+  .ngTopPanel {
+    width: 100% !important;
+    .ngGroupPanel {
+      width: 100% !important;
+      background-color: @dkblue-text;
+      height: 37px !important;
+      .border-radius(0 @border-radius-base 0 0);
+      .ngGroupPanelDescription {
+        font-weight: @extralight;
+        font-size: 0;
+        margin-left: 10px;
+        font-style: italic;
+        display: inline-block;
+        float: left;
+        margin-top: 10px;
+        color: transparent;
+      }
+      ul.ngGroupList {
+        margin-right: 62px;
+        display: block !important;
+        overflow: hidden;
+        height: 38px;
+        .transition();
+        &.dropzone:after{
+          content:"";
+          height: 38px;
+          width: 115px;
+          float: right;
+          display: inline-block;
+          background-color: fade(@brand-warning, 50%);
+        }
+        li {
+          height: 37px;
+          padding: 0;
+          margin: 0 0 0 2px;
+          float: right;
+          .ngGroupElement {
+            height: 100%;
+            padding: 0;
+            border-radius: 0;
+            background-color: transparent;
+            margin: 0;
+            .ngGroupName {
+              line-height: 35px;
+              top: -5px;
+              height: 37px;
+              font-size: 13px;
+              padding: 0 0 0 12px;
+              font-weight: @regular;
+              background-color: @gray-darker;
+              color: #f5f5f5;
+              margin: 0;
+              border: 0 none transparent;
+              overflow: hidden;
+              .border-radius(0);
+              .ngRemoveGroup {
+                background-color: transparent;
+                width: 0;
+                display: inline-block;
+                padding: 0;
+                margin: 0 0 0 10px;
+                height: 37px;
+                line-height: 37px;
+                color: transparent;
+                font-size: 0;
+                position: relative;
+                top: -5px;
+                opacity: 1;
+                .transition();
+                .close-icon(@gray-darker, #000);
+                &::before, &::after {
+                  top: 18px;
+                  left: 10px;
+                }
+              }
+            }
+            .ngGroupArrow {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+    .editMode {
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      .edit-mode-toggle, .edit-mode-info {
+        position: absolute;
+        .transition(0.2s, ease-out, color);
+        &:hover {
+          text-decoration: none;
+        }
+      }
+
+      .edit-mode-toggle {
+        .transition();
+        color: #fff;
+        right: 33px;
+        top: 7px;
+        display: inline-block;
+        min-width: 10px;
+        height: 21px;
+        &.edit-on {
+          right: 18px;
+          .close-icon(#fff, @gray-light);
+          &::before, &::after {
+            top: 9px;
+          }
+        }
+        &.ss-write {
+          font-size: 18px;
+          z-index: 9001;
+        }
+        &:hover {
+          color: @gray-light;
+        }
+      }
+
+      .info-icon {
+        position: absolute;
+        display: inline-block;
+        font-size: 11px;
+        top: 12px;
+        right: 11px;
+        height: 13px;
+        width: 13px;
+        border-radius: 8px;
+        padding: 0 0 1px 1px;
+        background-color: #252224;
+        text-align: center;
+        &:hover {
+          text-decoration: none;
+          & + .grid-tooltip {
+            display: inline-block;
+            opacity: 1;
+          }
+          & ~ .edit-mode-toggle {
+            opacity: 0;
+          }
+        }
+      }
+      .grid-tooltip {
+        background-color: @brand-info;
+        height: 30px;
+        border-radius: @border-radius-small;
+        position: relative;
+        top: 3px;
+        right: 33px;
+        width: auto;
+        padding: 9px 13px 0;
+        z-index: 9001;
+        font-size: 12px;
+        font-family: @font-family-sans-serif !important;
+        -webkit-font-smoothing: antialiased;
+        color: @blue-text;
+        white-space: nowrap;
+        .transition();
+        opacity: 0;
+        .font-awesome("\f0da");
+        &::before {
+          position: absolute;
+          font-size: 23px;
+          right: -7px;
+          top: 4px;
+          color: @brand-info;
+        }
+      }
+    }
+  }
+  .ngHeaderContainer {
+    background-color: @grid-bg;
+    border-bottom: 1px solid @grid-border;
+    .ngVerticalBar {
+      background-color: @grid-border;
+    }
+    .ngHeaderCell {
+      background-color: @grid-bg;
+      &:last-child {
+        border-right: 1px solid @grid-border;
+      }
+      &.dragParent + .colParent {
+        .ngHeaderSortColumn.insertCol {
+          &:after {
+            content: "";
+            position: absolute;
+            left: -1px;
+            top: 0;
+            height: 38px;
+            width: 0;
+            background-color: @brand-warning;
+          }
+        }
+        &+ .ngHeaderCell {
+          .ngHeaderSortColumn {
+            &:after {
+              content: "";
+              position: absolute;
+              left: -1px;
+              top: 0;
+              height: 38px;
+              width: 3px;
+              background-color: @brand-warning;
+            }
+          }
+        }
+      }
+      .ngHeaderSortColumn {
+        width: 100% !important;
+        height: 38px;
+        &.insertCol {
+          &:after {
+            content:"";
+            position: absolute;
+            left: -1px;
+            top: 0;
+            height: 38px;
+            width: 3px;
+            background-color: @brand-warning;
+          }
+        }
+        &.edit-mode {
+          .font-awesome("\f07e");
+          cursor: ew-resize !important;
+          &.groupable {
+            .font-awesome("\f047");
+            cursor: move !important;
+          }
+          &.isDragging{
+            background-color: fade(@gray-lighter, 30%);
+            .ngHeaderText{
+              font-style: italic;
+              opacity: 0.5;
+            }
+            &:before{
+              content: "" !important;
+            }
+          }
+          &:before {
+            position: absolute;
+            right: 7px;
+            top: 10px;
+            color: fade(@dkblue-text, 40%);
+          }
+        }
+        .ngHeaderText {
+          width: 100%;
+          color: @grid-text;
+          font-weight: normal;
+          font-style: normal;
+          line-height: 35px;
+          font-size: 13px;
+          padding: 0 10px;
+        }
+        .filter {
+          position: absolute;
+          right: 10px;
+          top: 10px;
+          display: inline-block;
+          .font-awesome("\f0b0");
+          &::before {
+            .transition();
+            color: fade(@grid-text, 35%);
+            position: relative;
+          }
+          &:hover {
+            text-decoration: none;
+            &::before {
+              color: fade(@grid-text, 60%);
+            }
+          }
+        }
+        .ngSortButtonUp,
+        .ngSortButtonDown {
+          border-color: @grid-text transparent;
+          position: relative;
+          top: -3px;
+          left: 8px;
+          bottom: initial;
+          right: initial;
+          display: inline-block;
+        }
+        .ngSortPriority {
+          display: none;
+        }
+      }
+    }
+  }
+  .ngViewport {
+    height: auto !important;
+    width: 100% !important;
+    margin-top: 5px;
+    #filter-row {
+      .box-sizing(border-box);
+      height: 0;
+      overflow: hidden;
+      border-width: 0;
+      border-style: solid;
+      border-color: @grid-border transparent #fff;
+      background-color: @gray-lighter;
+      padding: 0 14px;
+      .transition(0.1s, linear);
+      &.expanded {
+        padding: 7px 14px;
+        border-width: 1px 0;
+        height: auto;
+      }
+      label {
+        display: inline-block;
+        color: @dkblue-text;
+        font-weight: @extralight;
+        font-size: 12px;
+        margin: 4px 10px 0 0;
+      }
+      input[type=search] {
+        border: 2px solid #c5c5c7;
+        .border-radius(@border-radius-base);
+      }
+    }
+    .ngCanvas {
+      min-width: 100%;
+      .ngAggregate {
+        background-color: #fff;
+        left: 0 !important;
+        border-bottom: 1px solid @grid-border;
+        .ngAggregateText {
+          top: 10px;
+          position: relative !important;
+          font-size: 13px;
+        }
+        .aggChildCount {
+          background-color: @brand-warning;
+          color: @dkblue-text;
+          float: right;
+          text-align: center;
+          padding: 3px 5px 0;
+          margin-top: 6px;
+          min-width: 40px;
+          border-radius: 12px;
+          height: 24px;
+          margin-right: 10px;
+          .box-sizing(border-box);
+        }
+        .ngAggArrowCollapsed,
+        .ngAggArrowExpanded {
+          top: -4px !important;
+          left: 8px !important;
+          position: relative !important
+        }
+        .ngAggArrowCollapsed {
+          top: -7px !important;
+          border-color: rgba(0, 0, 0, 0) #272727;
+          border-width: 5px 0 5px 5px;
+        }
+        .ngAggArrowExpanded {
+          border-color: #272727 rgba(0, 0, 0, 0);
+          border-width: 5px 5px 0 5px;
+        }
+      }
+      .ngRow {
+        background-color: #fff;
+        border-bottom: 1px solid @grid-border;
+        min-width: 100% !important;
+        .ngCell {
+          background-color: transparent;
+          font-weight: @extralight;
+        }
+
+        &.selected, &:hover {
+          background-color: fade(@brand-primary, 10%);
+          box-sizing: border-box;
+        }
+        &.selected {
+          .ngCellText {
+            color: @brand-primary;
+          }
+        }
+        .ngVerticalBar {
+          background-color: transparent;
+        }
+        .ngCellText {
+          color: @grid-text;
+          font-size: 12px;
+          padding: 11px 10px 0;
+          .selectable(text);
+        }
+      }
+    }
+  }
+  .ngFooterPanel {
+    padding-top: 4px;
+    border: 0 none transparent;
+    .box-shadow(0 -1px 0 0 #cbcbcb inset);
+    height: 38px;
+    font-size: 12px;
+    background-color: #fff;
+    color: @gray-light;
+    font-weight: @extralight;
+    .border-radius(0);
+    .ngRowCountPicker {
+      .ngLabel {
+        margin: 8px 10px 0 !important;
+      }
+      .select2-container {
+        width: 70px !important;
+        top: 0;
+        height: 27px;
+        input {
+          display: none;
+        }
+        .select2-choice {
+          border-color: @input-border;
+          height: 30px;
+          padding: 2px 12px;
+          .select2-chosen {
+            margin-right: 0;
+          }
+
+          b {
+            padding-top: 7px;
+            right: 2px;
+          }
+        }
+      }
+    }
+    .ngTotalSelectContainer {
+      position: absolute;
+      text-align: center;
+      top: 3px;
+      left: 50%;
+      width: 200px;
+      margin-left: -100px;
+    }
+    .ngPagerContainer {
+      margin-top: 0 !important;
+      margin-right: 2px;
+      .ngPagerCurrent {
+        box-shadow: none;
+        -webkit-box-shadow: none;
+        -webkit-appearance: none;
+        border: 2px solid @input-border;
+        .border-radius(@border-radius-base);
+        height: 30px;
+        margin-top: 0;
+        margin: 0 5px;
+        color: @dkblue-text;
+        padding: 0 0 0 10px;
+        width: 50px;
+        font-size: 12px;
+      }
+      .ngPagerButton {
+        padding: 0;
+        background: transparent none no-repeat;
+        border: 0 none transparent;
+        color: @gray;
+        font-size: 18px;
+        outline: none;
+        height: auto;
+        min-width: 0;
+        width: auto;
+        &:hover {
+          color: @gray-darker;
+        }
+        &:disabled {
+          color: #d1d1d1;
+        }
+        .ngPagerPrevTriangle,
+        .ngPagerNextTriangle {
+          border: 0 none transparent;
+          width: 10px;
+          height: 15px;
+          position: relative;
+          top: 3px;
+        }
+        .ngPagerPrevTriangle {
+          .font-awesome("\f0d9");
+          margin-right: 20px;
+        }
+        .ngPagerNextTriangle {
+          .font-awesome("\f0da");
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+  &.fluid-grid {
+    .ngViewport {
+      .ngCanvas {
+        min-width: 100%;
+        width: 100%;
+        overflow: hidden;
+        .box-sizing();
+        >div, >.ngAggregate, >div>.ngAggregate, >.ngAggregate>div {
+          width: 100%;
+        }
+        .row-holder {
+          border-bottom: 1px solid @grid-border;
+        }
+      }
+    }
+  }
+  &.isEditMode {
+    .ngTopPanel {
+      .ngGroupPanel {
+        ul.ngGroupList {
+          margin-right: 37px;
+          li {
+            .ngGroupName {
+              background-color: @brand-warning;
+              color: @gray-darker;
+              .ngRemoveGroup {
+                background-color: #f4a81e;
+                width: 37px;
+                padding: 0 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  &.isGrouped .ngHeaderContainer .ngHeaderCell .ngHeaderSortColumn.edit-mode {
+    .font-awesome("");
+    cursor: default !important;
+    &.groupable {
+      .font-awesome("\f07d");
+      cursor: ns-resize !important;
+    }
+    &:after {
+      content: "";
+      width: 0;
+    }
+  }
+}
+
+//this is the DOM element created by jQuery UI drag-and-drop for column grouping/reordering
+body > .ngHeaderSortColumn {
+  &.ui-draggable-dragging {
+    display: inline-block;
+    color: @gray-darker;
+    font-weight: @extralight;
+    background-color: @brand-warning;
+    height: 36px;
+    padding: 5px 35px 0 10px;
+    .box-sizing(border-box);
+    z-index: 2000 !important;
+    .font-awesome("\f07e");
+    &.groupable {
+      .font-awesome("\f047");
+      &.groupable-only {
+        .font-awesome("\f07d");
+      }
+    }
+    &::before {
+      color: fade(@dkblue-text, 50%);
+      position: absolute;
+      right: 7px;
+      top: 10px;
+    }
+    .ngHeaderText {
+      font-size: 13px;
+      font-weight: 400;
+      font-style: italic;
+    }
+    .ngSortButtonDown, .ngSortButtonUp, .ngSortPriority {
+      display: none;
+    }
+  }
+}
+
+#filter-row {
+  #filter {
+    display: none;
+  }
+}

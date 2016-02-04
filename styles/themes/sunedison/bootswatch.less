@@ -1,0 +1,56 @@
+//mixins
+
+.fade-effect (@prop, @time) {
+  -webkit-transition: @prop @time;
+  -moz-transition: @prop @time;
+  -ms-transition: @prop @time;
+  -o-transition: @prop @time;
+  transition: @prop @time;
+}
+
+//form element styles
+.placeholder-style {
+  font-style: italic;
+  line-height: 1.7em;
+}
+.input-group {
+  .input-group-addon {
+    color: @gray;
+  }
+  input {
+    border-left-width: 0;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    &:focus {
+      border-color: @input-border;
+    }
+
+  }
+}
+input {
+  &:-moz-placeholder {
+    .placeholder-style();
+  }
+  &::-moz-placeholder {
+    .placeholder-style();
+  }
+  &:-ms-input-placeholder {
+    .placeholder-style();
+  }
+  &::-webkit-input-placeholder {
+    .placeholder-style();
+  }
+}
+button {
+  .fade-effect(all, 200ms);
+
+}
+footer {
+  ul {
+    li {
+      &.fa.fa-circle::before {
+        color: #b5b5b5;
+      }
+    }
+  }
+}

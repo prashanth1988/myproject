@@ -1,0 +1,39 @@
+section.dashboard-overview-container {
+  &#operations-overview-bar {
+    article.dashboard-panel {
+      // Connected Tiles
+      &.connected-tiles {
+        article.connected-tile {
+          &.orders-arriving {
+            section.tile-graphic-container {
+              div.circle-graphic {
+                background: @brand-blue-subdued;
+              }
+            }
+          }
+          &.jobs-waiting {
+            section.tile-graphic-container {
+              div.circle-graphic {
+                background: @brand-orange-subdued;
+              }
+            }
+          }
+          &.jobs-overdue {
+            section.tile-graphic-container {
+              div.circle-graphic {
+                background: @brand-yellow-subdued;
+              }
+            }
+          }
+        }
+      }
+      // Progress Bar
+      section.progress-bar-container {
+        div.progress {
+          margin-top: 0px;
+          margin-bottom: 0px;
+        }
+      }
+    }
+  }
+}

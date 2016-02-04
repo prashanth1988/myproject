@@ -1,0 +1,119 @@
+#reports {
+  background-color: @brand-gray;
+  overflow: hidden;
+  border-width: 0 1px 1px;
+  border-color: #cbcbcb;
+  border-style: solid;
+  .box-shadow(0 -1px 0 0 #cbcbcb inset);
+  .border-radius(@border-radius-base);
+  #report-selector {
+    padding: 0;
+    .box-shadow(1px 0 0 0 #cbcbcb);
+    .panel-group {
+      .panel {
+        .box-shadow(none);
+        .transition(0.4s, ease-out);
+        background-color: @brand-gray;
+        &.expanded, &:hover {
+          background-color: #fff;
+        }
+        &:first-child {
+          border-top: 0 none transparent;
+        }
+        &:last-child {
+          .box-shadow( 0 -1px 0 0 #cbcbcb inset);
+        }
+        margin-top: 0;
+        border-radius: 0;
+        border-color: #e0e0e0;
+        border-width: 1px 0 0 0;
+        .panel-heading {
+          padding: 0;
+          background-color: transparent;
+          border-radius: 0;
+          h4 {
+            padding: 0;
+            a {
+              padding: 15px 13px 13px;
+              font-size: 13px;
+              display: block;
+              &:hover {
+                text-decoration: none;
+              }
+            }
+          }
+        }
+        .panel-collapse {
+          .panel-body {
+            border: 0 none transparent;
+            text-align: right;
+            padding: 0 13px 13px;
+            .report-view-toggle {
+              display: inline-block;
+              height: 33px;
+              width: 33px;
+              text-align: center;
+              line-height: 35px;
+              border-radius: 17px;
+              background-color: #ececed;
+              margin-left: 8px;
+              color: #cacbcd;
+              .transition();
+              &.chart {
+                font-size: 17px;
+              }
+              &.grid {
+                font-size: 19px;
+              }
+              &:hover, &.selected {
+                text-decoration: none;
+                background-color: @brand-primary;
+                color: #fff;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  #report-container {
+    position: relative;
+    padding: 0;
+    h2 {
+      display: none;
+      position: absolute;
+      z-index: 9999;
+      color: #fff;
+      font-size: 15px;
+      margin: 11px 10px 10px;
+    }
+  }
+  .spinner-mask{
+    position: absolute;
+    width: 100%;
+    background-color: rgba(255,255,255,0.9);
+    min-height: 200px;
+    height: 100%;
+    top: 0;
+    left: 1px;
+    z-index: 10000;
+    p {
+      font-size: 12px;
+      font-style: italic;
+      position: relative;
+      top: 50%;
+      margin-top: 50px;
+      text-align: center;
+      color: @gray-darker
+    }
+    .spinner {
+      .scale(0.6);
+      top: 50%;
+      svg {
+        ellipse {
+          fill: @gray-darker;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,128 @@
+//custom sf mixins
+
+.box-sizing (@type: border-box) {
+  -webkit-box-sizing: @type;
+  -moz-box-sizing: @type;
+  box-sizing: @type;
+}
+
+.border-radius(@radius: 5px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+}
+
+.box-shadow (@string) {
+  -webkit-box-shadow: @string;
+  -moz-box-shadow: @string;
+  box-shadow: @string;
+}
+
+.opacity (@opacity: 0.5) {
+  -webkit-opacity: @opacity;
+  -moz-opacity: @opacity;
+  opacity: @opacity;
+}
+
+.transition(@duration:0.2s, @ease:ease-out, @property:all) {
+  -webkit-transition: @property @duration @ease;
+  -moz-transition: @property @duration @ease;
+  -o-transition: @property @duration @ease;
+  transition: @property @duration @ease;
+}
+
+
+.animation (@name, @duration: 300ms, @delay: 0, @ease: ease-out) {
+  -webkit-animation: @name @duration @delay @ease;
+  -moz-animation: @name @duration @delay @ease;
+  -ms-animation: @name @duration @delay @ease;
+  animation: @name @duration @delay @ease;
+}
+
+.transform(@string) {
+  -webkit-transform: @string;
+  -moz-transform: @string;
+  -ms-transform: @string;
+  -o-transform: @string;
+}
+
+.transform-origin (@x:center, @y:center) {
+  -webkit-transform-origin: @x @y;
+  -webkit-transform-origin-x: @x;
+  -webkit-transform-origin-y: @y;
+  -moz-transform-origin:    @x @y;
+  -ms-transform-origin:     @x @y;
+  -o-transform-origin:      @x @y;
+}
+
+.translate (@x, @y:0) {
+  -webkit-transform: translate(@x, @y);
+  -moz-transform: translate(@x, @y);
+  -ms-transform: translate(@x, @y);
+  -o-transform: translate(@x, @y);
+}
+
+.scale (@factor) {
+  -webkit-transform: scale(@factor);
+  -moz-transform: scale(@factor);
+  -ms-transform: scale(@factor);
+  -o-transform: scale(@factor);
+}
+
+.rotate (@deg) {
+  -webkit-transform: rotate(@deg);
+  -moz-transform: rotate(@deg);
+  -ms-transform: rotate(@deg);
+  -o-transform: rotate(@deg);
+}
+.draggable(@string: none){
+  -moz-user-select: @string; /* These user-select properties are inheritable, used to prevent text selection */
+  -webkit-user-select: @string;
+  -ms-user-select: @string; /* From IE10 only */
+  user-select: @string; /* Not valid CSS yet, as of July 2012 */
+  -webkit-user-drag: @string; /* Prevents dragging of images/divs etc */
+  user-drag: @string;
+}
+.selectable(@string: none) {
+  -moz-user-select: @string;
+  -webkit-user-select: @string;
+  -ms-user-select: @string;
+  -o-user-select: @string;
+}
+.close-icon(@color, @hover-color, @transition-time:0.2s) {
+  &::before, &::after {
+    .transition(@transition-time, ease-out, color);
+    content: "";
+    width: 18px;
+    height: 2px;
+    background-color: @color;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  &::before {
+    .rotate(45deg);
+  }
+  &::after {
+    .rotate(-45deg);
+  }
+  &:hover {
+    &::before, &::after {
+      background-color: @hover-color;
+    }
+  }
+}
+
+.font-awesome(@char) {
+  display: inline-block;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  font-family: @font-family-sans-serif;
+  &::before {
+    content: @char;
+    font-family: FontAwesome;
+
+  }
+}
+

@@ -1,0 +1,355 @@
+.chart-holder {
+  padding-top: 20px;
+  background-color: #fff;
+  border-left: 1px solid #cdcdcd;
+  position: relative;
+  width: 100%;
+  .chart {
+    position: relative;
+    &.multibar {
+      svg {
+        .nv-wrap {
+          .translate(25px, 55px);
+          .nv-legendWrap {
+            .translate(0px, -35px);
+          }
+          .nv-axis.nv-y {
+            g.tick {
+              text {
+                .translate(-5px);
+                fill: #ccc !important;
+              }
+            }
+          }
+        }
+      }
+      stacked-grouped-bar-chart {
+        min-width: 700px;
+        max-width: 1000px;
+        width: 95%;
+        margin: auto;
+        display: block;
+        height: 500px;
+        svg {
+          text.bar-label {
+            font-size: 30px;
+            font-family: @font-family-sans-serif;
+            font-weight: @extralight;
+            &:nth-of-type(odd) {
+              fill: #fff;
+              font-size: 17px;
+              .translate(0, 40px);
+              font-style: italic;
+              font-weight: @extralight;
+            }
+          }
+          .legend {
+            text {
+              font-size: 15px;
+            }
+          }
+          .axis {
+            path.domain {
+              fill-opacity: 0;
+              stroke: transparent;
+
+            }
+
+            g.tick {
+              line {
+                width: 100%;
+                fill: none;
+                stroke: #E5E5E5;
+                shape-rendering: crispEdges;
+
+              }
+              text {
+                font-size: 12px;
+              }
+            }
+            &.y {
+              g.tick {
+                text {
+                  fill: #ccc !important;
+                  font-weight: @extralight;
+                  font-size: 16px;
+                }
+              }
+            }
+            &.x {
+              g.tick {
+                line {
+                  stroke: transparent;
+                }
+              }
+            }
+          }
+        }
+        &#milestoneChart {
+          svg {
+            &>g {
+              .transform(translate(85px, 35px));
+            }
+          }
+        }
+      }
+    }
+    &.horiz-bar {
+      height: 550px !important;
+      max-width: 1200px;
+      margin: auto;
+      svg {
+        .nv-multiBarHorizontalChart {
+          .translate(50px, 30px);
+          .nv-legendWrap {
+            .translate(0px, -55px);
+          }
+          .nv-groups {
+            .nv-group {
+              .nv-bar.positive {
+                rect {
+                  fill-opacity: 1;
+                  & + text {
+                    font-size: 30px;
+                    font-weight: @light;
+                  }
+                }
+              }
+            }
+          }
+          .nv-axis {
+            path.domain {
+              stroke: transparent;
+            }
+            g.tick {
+              text {
+                fill: #ccc !important;
+              }
+            }
+            &.nv-x {
+              .tick {
+                line {
+                  stroke: transparent;
+                }
+              }
+            }
+          }
+        }
+      }
+      &#pipeline {
+        &.salesUser {
+          .nv-multiBarHorizontalChart {
+            .translate(180px, 30px);
+            .nv-axis {
+              g.tick {
+                text {
+                  .transform(scale(1) translate(0, 22px));
+                }
+              }
+              &.nv-x {
+                .transform(scale(1.05) translate(0,-35px));
+              }
+            }
+            .nv-groups {
+              .transform(scaleY(0.9) translate(0, 25px));
+              .nv-group {
+                .nv-bar.positive {
+                  rect {
+                    .transform(scaleY(4) translate(0, -6px));
+                    & + text {
+                      .transform(translate(5px, 0) scaleY(1.11));
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        &.nonSalesUser {
+          .nv-multiBarHorizontalChart {
+            .translate(200px, 30px);
+            .nv-axis {
+              g.tick {
+                text {
+                  .translate(0, 10px);
+                }
+              }
+              &.nv-x {
+                .transform(scale(1.05) translate(-5px,-25px));
+              }
+            }
+            .nv-groups {
+              .transform(scaleY(0.80) translate(0, 55px));
+              .nv-group {
+                .nv-bar.positive {
+                  rect {
+                    .transform(scaleY(3) translate(0, -14px));
+                    & + text {
+                      .transform(translate(5px, 0) scaleY(1.25));
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      &#openOrders {
+        svg {
+          .nv-multiBarHorizontalChart {
+            .transform(scale(0.96) translate(160px, 30px));
+            .nv-axis {
+              g.tick {
+                text {
+                  .translate(0, 15px);
+                }
+              }
+              &.nv-x {
+                .transform(scale(1.1) translate(-5px,-34px));
+              }
+            }
+            .nv-groups {
+              .transform(scaleY(0.9) translate(0, 25px));
+              .nv-group {
+                .nv-bar.positive {
+                  rect {
+                    .transform(scaleY(3) translate(0, -8px));
+                    & + text {
+                      .transform(translate(5px, 0px) scaleY(1.11));
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &.salesUser {
+        .nv-groups {
+          .nv-group {
+            .nv-bar.positive {
+              rect {
+                & + text {
+                  .translate(10px, 0px);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  &#openInvoices {
+    svg {
+      height: 400px;
+      width: 100%;
+    }
+    padding-bottom: 30px;
+  }
+  svg {
+
+    text:not(.bar-label) {
+      font-family: @font-family-base;
+      fill: @gray !important;
+      font-weight: @light;
+    }
+    .nvd3.nv-wrap.nv-axis {
+      path.domain {
+        stroke: transparent;
+      }
+      g.tick {
+        text {
+          font-size: 13px !important;
+        }
+      }
+    }
+    .nv-label {
+      text {
+        font-size: 30px;
+      }
+    }
+    .nv-legendWrap {
+      .nv-series {
+        text.nv-legend-text {
+          font-size: 15px;
+          .translate(2px);
+        }
+      }
+    }
+    .nv-pieWrap {
+      .translate(0, 30px);
+      .nv-pie {
+        .nv-label {
+          text {
+            .translate(0, 10px);
+          }
+        }
+        .nv-slice {
+          path {
+            stroke-width: 0;
+
+          }
+        }
+      }
+    }
+    .nv-multiBarWithLegend {
+      .nv-axis {
+        &.nv-x {
+          .tick {
+            line {
+              display: none;
+            }
+          }
+        }
+        &.nv-y {
+          path.domain {
+            display: none;
+          }
+        }
+        .nv-axisMaxMin {
+          text {
+            font-weight: @light;
+          }
+        }
+      }
+      rect {
+        fill-opacity: 1;
+      }
+    }
+    & ~ div.nvtooltip, & ~ div.nvtooltip-pending-removal {
+      margin-top: 100px;
+      font-weight: @light;
+      background: transparent;
+      font-family: @font-family-base;
+      font-size: 30px;
+      border: 0 none transparent;
+      color: @gray;
+
+    }
+  }
+
+  div.empty-state.graph {
+    height: 400px;
+    padding-top: 95px;
+    div.empty-state-icon-container {
+      height: 150px;
+      width: 150px;
+      margin: auto;
+    }
+    div.empty-state-message-container {
+      width: 100%;
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      span {
+        text-align: center;
+        font-size: 18px;
+        line-height: 20px;
+        font-family: @font-family-sans-serif;
+        font-weight: @light;
+      }
+    }
+  }
+
+}

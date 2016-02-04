@@ -1,0 +1,56 @@
+section.dashboard-overview-container {
+  article.dashboard-panel {
+    header.tile-side-label {
+      height: 200px;
+      width: 40px;
+      display: block;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      bottom: 0px;
+      background: #f5f5f5;
+      border-width: 0px 0px 1px 0px;
+      border-color: #cbcbcb;
+      border-style: solid;
+      .box-shadow(0 -1px 0 0 #cbcbcb inset);
+      border-bottom-left-radius: @border-radius-base;
+      border-top-left-radius: @border-radius-base;
+      span.vertical-text {
+        position: absolute;
+        display: inline-block;
+        width: 200px;
+        text-align: center;
+        left: 0;
+        color: #9c9ea1;
+        text-transform: uppercase;
+        top: 200px;
+        line-height: 38px;
+        .transform-origin(0,0);
+        .rotate(-90deg);
+      }
+    }
+  }
+
+  &#executive-overview-bar {
+    article.dashboard-panel {
+      header.tile-side-label {
+        height: 170px;
+        span.vertical-text {
+          width: 170px;
+          top: 200px;
+          line-height: 41px;
+          font-size: 16px;
+          font-weight: @light;
+        }
+      }
+    }
+  }
+
+  &#sales-overview-bar {
+
+  }
+
+  &#operations-overview-bar {
+
+  }
+}

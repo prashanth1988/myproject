@@ -1,0 +1,60 @@
+section.dashboard-overview-container {
+  article.dashboard-panel {
+    section.progress-bar-container {
+      div.progress-bar-top-label {
+        span {
+          font-size: 12px;
+          line-height: 28px;
+          font-weight: @extralight;
+          text-align: left;
+        }
+      }
+      div.progress {
+        height: 25px;
+        .border-radius(25px);
+        div.progress-bar {
+          font-size: 12px;
+          line-height: 28px;
+          font-weight: @extralight;
+          .border-radius(25px);
+          span.sr-only {
+
+          }
+        }
+        &.red-progress-bar {
+          background: fade(@brand-red, 20%);
+          div.progress-bar {
+            background: @brand-red;
+          }
+        }
+        &.orange-progress-bar {
+          background: fade(@brand-orange-subdued, 20%);
+          div.progress-bar {
+            background: @brand-orange-subdued;
+          }
+        }
+        &.purple-progress-bar {
+          background: fade(@brand-purple, 20%);
+          div.progress-bar {
+            background: @brand-purple;
+          }
+        }
+        &.progress-bar-no-background {
+          background: fade(@brand-white, 20%);
+          box-shadow: none;
+        }
+        &.progress-bar-label-justify-right {
+          div.progress-bar {
+            text-align: right;
+            padding-right: 10px;
+          }
+        }
+      }
+      div.progress-legend {
+        span.progress-label {
+          color: @brand-orange;
+        }
+      }
+    }
+  }
+}

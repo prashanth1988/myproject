@@ -1,0 +1,86 @@
+section.dashboard-overview-container {
+  article.dashboard-panel {
+    header.tile-legend-container {
+      width: 100%;
+      h4.primary-legend {
+        font-size: 14px;
+        line-height: 32px;
+        text-align: center;
+        font-weight: @extralight;
+      }
+      h6.secondary-legend {
+        font-size: 12px;
+        line-height: 12px;
+        text-align: center;
+        font-weight: @extralight;
+      }
+    }
+    &.connected-tiles {
+      &.no-dividers {
+        border-bottom-left-radius: 0px !important;
+        border-bottom-right-radius: 0px !important;
+        article.connected-tile {
+          border-bottom-left-radius: 0px !important;
+          border-bottom-right-radius: 0px !important;
+        }
+      }
+      div.dashboard-panel-inner-container {
+        height: 200px;
+        width: 100%;
+        background: @brand-white;
+        border-width: 0 1px 1px;
+        border-color: #cbcbcb;
+        border-style: solid;
+        float: left;
+        position: relative;
+        section.connected-tiles-wrapper {
+          position: absolute;
+          left: 40px;
+          top: 0px;
+          bottom: 0px;
+          right: 0px;
+        }
+        article.connected-tile {
+          height: 199px;
+          width: 33.3%;
+          float: left;
+          background: @brand-white;
+          border-width: 0px 0px 1px 0px;
+          border-color: #cbcbcb;
+          border-style: solid;
+          &.with-padding {
+            padding: 15px;
+          }
+          &.connected-tile-with-borders:nth-child(2) {
+              border-width: 0px 1px 1px 1px;
+              border-color: #cbcbcb;
+              border-style: solid;
+          }
+          &:first-child {
+            border-bottom-left-radius: @border-radius-base;
+          }
+          &:last-child {
+            border-bottom-right-radius: @border-radius-base;
+          }
+        }
+      }
+    }
+  }
+
+  &#executive-overview-bar {
+    div.dashboard-panel-inner-container {
+      height: 170px;
+      article.connected-tile {
+        height: 170px;
+      }
+    }
+  }
+
+  &#sales-overview-bar {
+
+  }
+
+  &#operations-overview-bar {
+
+  }
+}

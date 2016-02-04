@@ -1,0 +1,56 @@
+@import "homeowner-list/homeowner-list";
+@import "homeowner-list/homeowner-map";
+
+#homePageMapViewWrapper {
+  height: 490px;
+}
+
+#homepage {
+  .home-panel-heading {
+    background-color: #424242;
+    color: #FFFFFF;
+  }
+
+  .list-group-item {
+    color: #4b89c8;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .table-label {
+    .table-label();
+  }
+  .homeowner-list-table {
+    .homeowner-list-table();
+  }
+
+  .prospects-heading {
+
+    .vcenter() {
+      display: inline-block;
+      vertical-align: middle;
+      float: none;
+    }
+
+    .col-md-10 {
+      .vcenter();
+    }
+
+    .col-md-2 {
+      .vcenter();
+    }
+
+    .btn-group .pull-right {
+      .vcenter();
+    }
+
+    #viewMoreHomeowners {
+      font-size: 16px;
+    }
+
+
+  }
+
+}

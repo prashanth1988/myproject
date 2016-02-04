@@ -1,0 +1,158 @@
+section.dashboard-overview-container {
+  height: 215px;
+  article.dashboard-panel {
+    height: 200px;
+    .border-radius(@border-radius-base);
+    div.dashboard-panel-inner-container {
+      height: 200px;
+      background-color: #f5f5f5;
+      border-width: 0 1px 1px;
+      border-color: #cbcbcb;
+      border-style: solid;
+      .box-shadow(0 -1px 0 0 #cbcbcb inset);
+      .border-radius(@border-radius-base);
+    }
+    section.dashboard-content {
+      background: @brand-white;
+      height: 139px;
+      width: 100%;
+      padding: 15px;
+      border-top-left-radius: @border-radius-base;
+      border-top-right-radius: @border-radius-base;
+      div.dashboard-content-display {
+        width: 250px;
+        height: 100px;
+        display: block;
+        margin: auto;
+        margin-top: 20px;
+        div.account-status-icon {
+          width: 70px;
+          height: 70px;
+          i.fa {
+            font-size: 70px;
+          }
+        }
+        span.account-status-text {
+          width: 125px;
+          font-size: 20px;
+          line-height: 24px;
+          margin-top: 12px;
+          font-weight: @extralight;
+        }
+        &.account-current {
+          div.account-status-icon {
+            i.fa {
+              color: @brand-blue-dk;
+            }
+          }
+        }
+        &.account-overdue {
+          div.account-status-icon {
+            i.fa {
+              color: @brand-red;
+            }
+          }
+        }
+      }
+      span.graph-caption {
+        font-size: 16px;
+        font-weight: @extralight;
+      }
+      section.credit-summary-empty-state {
+        margin-top: 35px;
+        span {
+          width: 100%;
+          display: block;
+          font-size: 16px;
+          font-weight: @extralight;
+          text-align: center;
+          color: @brand-red;
+        }
+      }
+    }
+    header.dashboard-header {
+      background-color: #f5f5f5;
+      height: 50px;
+      width: 100%;
+      &.account-overdue {
+        h4.dashboard-header-text {
+          font-weight: @extralight;
+          background: @brand-red;
+          color: @brand-white;
+        }
+      }
+      h4.dashboard-header-text {
+        font-size: 16px;
+        text-align: center;
+        line-height: 60px;
+        font-weight: @extralight;
+      }
+    }
+  }
+
+  &#executive-overview-bar {
+    height: 190px;
+    article.dashboard-panel {
+      height: 170px;
+      div.dashboard-panel-inner-container {
+        height: 170px;
+      }
+      section.dashboard-content {
+        height: 119px;
+        div.dashboard-content-display {
+          margin-top: 12px;
+        }
+      }
+    }
+    header.dashboard-header {
+      h4.dashboard-header-text {
+        line-height: 50px;
+      }
+    }
+  }
+
+  &#sales-overview-bar {
+
+  }
+  &#operations-overview-bar {
+
+  }
+}
+
+// Components
+@import "components/dashboardPanelSubsection";
+@import "components/dashboardProgressBar";
+@import "components/dashboardPanelConnectedTiles";
+@import "components/dashboardPanelSideLabel";
+@import "components/dashboardPanelTileGraphContainer";
+
+// Variations
+@import "variations/operationsOverview";
+@import "variations/salesOverview";
+@import "variations/executiveOverview";
+
+
+section.tile-graph-container {
+  &.chart-empty-data {
+    div.donut-graph-internal-label {
+      h4.center-label-primary {
+        color: #B2B2B2 !important;
+      }
+      span.center-label-secondary {
+        color: #B2B2B2 !important;
+      }
+    }
+  }
+  text.nvd3.nv-noData {
+    display: none;
+  }
+}
+
+section.tile-graph-container.donut-graph {
+  text.nvd3.nv-noData {
+    display: none;
+  }
+}
+
+
+

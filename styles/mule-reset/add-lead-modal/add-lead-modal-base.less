@@ -1,0 +1,95 @@
+.close-icon-lead-modal(@color, @hover-color, @transition-time:0.2s) {
+
+}
+
+div#add-lead-modal {
+    .required-field-legend {
+        color: #d60c22;
+        font-weight: @light;
+    }
+
+    .required-field-indicator {
+        color: #d60c22;
+    }
+
+
+    div.modal-header {
+        background-color: @darker-gray;
+        height: 50px;
+        h4.modal-title {
+            color: white;
+        }
+        div.button-container {
+            display: block;
+            right: 15px;
+            top: 15px;
+            height: 30px;
+            width: 30px;
+            position: absolute;
+            cursor: pointer;
+            a.modal-close-x-button {
+                &::before, &::after {
+                    .transition(0.2s, ease-out, @brand-white);
+                    content: "";
+                    width: 18px;
+                    height: 2px;
+                    background-color: @brand-white;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+                &::before {
+                    .rotate(45deg);
+                }
+                &::after {
+                    .rotate(-45deg);
+                }
+                &::before, &::after {
+                    top: 9px;
+                    width: 30px;
+                }
+            }
+            &:hover {
+                a.modal-close-x-button {
+                    &::before, &::after {
+                        background-color: @gray-light !important;
+                    }
+                }
+            }
+        }
+    }
+    div.modal-body {
+        label.control-label {
+            text-align: left;
+            font-family: 'FiraSans', 'Helvetica';
+            font-weight: @light;
+        }
+        div.row {
+            margin-bottom: 0px;
+        }
+        h4.section-label {
+            margin-bottom: 5px;
+            font-family: 'FiraSans', 'Helvetica';
+            font-weight: @regular;
+        }
+    }
+    div.form-group {
+        margin-bottom: 5px;
+    }
+    div.modal-footer {
+        height: 50px;
+        padding: 8px;
+        button.btn.btn-primary {
+            background-color: @darker-gray;
+            border-color: @darker-gray;
+            position: relative;
+            width: 150px;
+            span#modal-spinner {
+                div.spinner {
+                    margin-top: 0px !important;
+                    left: 32px !important;
+                }
+            }
+        }
+    }
+}

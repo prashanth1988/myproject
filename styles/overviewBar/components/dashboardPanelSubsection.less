@@ -1,0 +1,96 @@
+section.dashboard-overview-container {
+  article.dashboard-panel {
+    header.dashboard-subsection-top-header {
+      padding-left: 15px;
+      padding-right: 15px;
+      padding-top: 0px;
+      h4 {
+        font-size: 14px;
+        text-align: left;
+        line-height: 42px;
+        font-weight: @extralight;
+      }
+    }
+    section.dashboard-subsection-container {
+      height: 200px;
+      .border-radius(@border-radius-base);
+      .box-shadow(0 -1px 0 0 #cbcbcb inset);
+      &.with-heading {
+        height: 158px;
+      }
+      article.dashboard-subsection {
+        list-style: none;
+        height: 50%;
+        padding: 15px;
+        padding-top: 5px;
+        section.subsection-label {
+          margin-top: 15px;
+          h4.subsection-text {
+            font-size: 16px;
+            font-weight: @extralight;
+            width: 50px;
+            line-height: 20px;
+            margin-top: 8px;
+          }
+        }
+        div.subsection-rounded-label {
+          background: #977BCE;
+          height: 50px;
+          width: 150px;
+          .border-radius(25px);
+          margin-top: 17px;
+          span.rounded-label-text {
+            margin-top: 2px;
+            font-family: 'FiraSans';
+            font-size: 32px;
+            font-style: normal;
+            line-height: 52px;
+            text-align: center;
+            display: block;
+            width: 100%;
+            font-weight: @extralight;
+            color: @brand-white;
+          }
+        }
+        &:last-child {
+          background-color: #EAEAEA;
+          border-width: 0px 0px 1px 0px;
+          border-color: #cbcbcb;
+          border-style: solid;
+          .border-radius(@border-radius-base);
+          .box-shadow(0 -1px 0 0 #cbcbcb inset);
+        }
+      }
+    }
+  }
+
+  &#executive-overview-bar {
+    article.dashboard-panel {
+      header.dashboard-subsection-top-header {
+        h4 {
+          line-height: 36px;
+        }
+      }
+      section.dashboard-subsection-container {
+        height: 170px;
+        &.with-heading {
+          height: 134px;
+        }
+        article.dashboard-subsection {
+          padding-top: 0px;
+          div.subsection-rounded-label {
+            margin-top: 15px;
+          }
+        }
+      }
+    }
+  }
+
+  &#sales-overview-bar {
+
+  }
+
+  &#operations-overview-bar {
+
+  }
+}

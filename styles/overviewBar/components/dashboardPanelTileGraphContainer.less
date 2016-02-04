@@ -1,0 +1,144 @@
+section.dashboard-overview-container {
+  article.dashboard-panel {
+    .blue-graph {
+      h4.center-label-primary {
+        color: @brand-blue-subdued;
+      }
+    }
+    .orange-graph {
+      h4.center-label-primary {
+        color: @brand-orange-subdued;
+      }
+    }
+    .yellow-graph {
+      h4.center-label-primary {
+        color: @brand-yellow-subdued;
+      }
+    }
+    .purple-graph {
+      h4.center-label-primary {
+        color: @brand-purple;
+      }
+    }
+    section.tile-graph-container {
+      position: relative;
+      &.donut-graph {
+        width: 100%;
+        height: 200px;
+        nvd3-pie-chart {
+          display: block;
+          width: 200px;
+          height: 200px;
+          margin: auto;
+          position: relative;
+          svg {
+            height: 200px;
+            width: 200px;
+            > g {
+              .transform(scaleY(2) scaleX(2));
+            }
+            path {
+              stroke: transparent;
+            }
+          }
+        }
+        div.donut-graph-internal-label {
+          position: absolute;
+          width: 100px;
+          height: 100px;
+          top: 70px;
+          left: 50px;
+          h4.center-label-primary {
+            text-align: center;
+            font-size: 28px;
+          }
+          span.center-label-secondary {
+            width: 100%;
+            font-weight: @extralight;
+            font-size: 12px;
+            text-align: center;
+            font-style: italic;
+            display: inline-block;
+            color: #9c9ea1;
+            span.bold-number {
+              font-weight: @regular;
+              display: inline;
+              color: #7a7a7a;
+            }
+          }
+          h4.center-label-primary {
+            text-align: center;
+            font-size: 28px;
+            &.count-length7 {
+              font-size: 22px;
+            }
+            &.count-length8 {
+              font-size: 18px;
+            }
+            &.count-length9 {
+              font-size: 16px;
+            }
+          }
+        }
+      }
+    }
+    section.tile-graphic-container {
+      width: 100%;
+      div.circle-graphic {
+        height: 100px;
+        width: 100px;
+        .border-radius(50px);
+        margin: auto;
+        margin-bottom: 10px;
+        span.circle-graphic-inner-text {
+          color: @brand-white;
+          font-size: 50px;
+          line-height: 106px;
+          font-weight: @extralight;
+          text-align: center;
+          width: 100%;
+          display: block;
+        }
+      }
+    }
+  }
+
+  &#executive-overview-bar {
+    section.tile-graph-container {
+      &.donut-graph {
+        height: 200px;
+        nvd3-pie-chart {
+          width: 200px;
+          height: 200px;
+          svg {
+            height: 200px;
+            width: 200px;
+          }
+        }
+        div.donut-graph-internal-label {
+          width: 100px;
+          top: 70px;
+          left: 50px;
+        }
+      }
+    }
+    section.tile-graphic-container {
+      div.circle-graphic {
+        height: 80px;
+        width: 80px;
+        span.circle-graphic-inner-text {
+          font-size: 45px;
+          line-height: 90px;
+        }
+      }
+    }
+  }
+
+  &#sales-overview-bar {
+
+  }
+
+  &#operations-overview-bar {
+
+  }
+}
