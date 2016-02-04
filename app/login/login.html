@@ -1,0 +1,52 @@
+<div class="container"
+     id="login-view">
+    <div class="logo-holder">
+        <!--img src="assets/images/logo-lg-text.svg"
+             alt="sunedison-logo-text"/-->
+    </div>
+    <div class="col-md-4 col-md-offset-4">
+
+        <form class="form-signin"
+              name="loginForm"
+              role="form">
+            <ul class="alert alert-list alert-warning" ng-show="loginPage.loginFailed">
+                <li>The user name or password you entered is incorrect.</li>
+                <sf-reset-password email-address="loginPage.username"></sf-reset-password>
+            </ul>
+
+            <div class="input-group input-group-lg username">
+                <input type="text"
+                       class="form-control"
+                       placeholder="Email Address"
+                       autofocus=""
+                       id="login-username"
+                       required
+                       ng-model="loginPage.username">
+            </div>
+            <div class="input-group input-group-lg password">
+                <input type="password"
+                       class="form-control"
+                       placeholder="Password"
+                       id="login-password"
+                       required
+                       ng-model="loginPage.password">
+            </div>
+            <button id="login-submit"
+                    class="btn btn-lg btn-primary btn-block"
+                    type="submit"
+                    ng-disabled="loginPage.isLoggingIn || loginForm.$invalid "
+                    ng-click="loginPage.login();">
+                <span class="login-text-holder">
+                    <span us-spinner="loginPage.spinnerOptions"
+                          id="login-spinner"
+                          spinner-key="spinner-1"></span>
+                    <span>
+                        <span ng-show="loginPage.isLoggingIn">Signing In...</span>
+                        <span ng-show="!loginPage.isLoggingIn">Sign In</span>
+                    </span>
+                </span>
+            </button>
+        </form>
+    </div>
+</div>
+

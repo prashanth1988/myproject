@@ -1,0 +1,18 @@
+<div id="add-lead-modal">
+	<form role="form"
+	      class="form-horizontal"
+	      name="proposalForm">
+                <div class="modal-header" >
+		    <div class="button-container"
+		         ng-click="cancel()">
+		        <a class="modal-close-x-button"></a>
+                    </div>
+                    <h4 id="proposalModalHeading" class="modal-title">Proposal Design & Contract({{homeownerVM.model.TransId}} - {{homeownerVM.model.FirstName}} {{homeownerVM.model.LastName}}) Address: {{homeownerVM.model.StreetNumAndName}} {{homeownerVM.model.Suburb}} {{homeownerVM.model.PostCode}} {{homeownerVM.model.StateCode}}
+                        <!--a id="streetViewLink" href="{{streetViewURL}}" onclick="window.open(this.href); return false;" >Address: {{homeownerVM.model.StreetNumAndName}} {{homeownerVM.model.Suburb}} {{homeownerVM.model.PostCode}} {{homeownerVM.model.StateCode}}</a-->
+                    </h4>
+                </div>
+		<div class="modsolar-login-iframe">
+                    <iframe class = "modsolar-login-iframe" ng-src="{{proposalURL}}"></iframe>
+                </div>
+        </form>
+</div>

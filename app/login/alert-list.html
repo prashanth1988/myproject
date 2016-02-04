@@ -1,0 +1,5 @@
+<ul class="alert alert-list"
+    ng-class="{ multiple : alerts.length > 1, 'alert-{{alertType}}' : alertType }"
+    ng-show="alerts">
+    <li ng-repeat="alert in alerts">{{ message ? alert[message] : alert}}</li>
+</ul>

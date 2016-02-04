@@ -1,0 +1,799 @@
+<div id="add-lead-modal" backspace-not-back-button>
+
+
+    <form role="form"
+          class="form-horizontal"
+          name="leadForm">        
+        <div class="modal-header">
+            <div class="button-container"
+                 ng-click="cancel()">
+                <a class="modal-close-x-button"></a>
+            </div>
+            <h4 class="modal-title" ng-show="homeownerVM.displayPhase === 'createOpportunity' || homeownerVM.displayPhase === 'editOpportunity'">{{operation}} Opportunity({{homeownerVM.model.TransId}} - {{homeownerVM.model.FirstName}} {{homeownerVM.model.LastName}})</h4>
+            <h4 class="modal-title" ng-show="homeownerVM.displayPhase === 'tariffDetails'">Bill Information({{homeownerVM.model.TransId}} - {{homeownerVM.model.FirstName}} {{homeownerVM.model.LastName}})</h4>
+        </div>
+        <div class="modal-body animate-show" ng-show="homeownerVM.displayPhase === 'createOpportunity' || homeownerVM.displayPhase === 'editOpportunity'">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="section-label">Homeowner</h4>
+                </div>
+                <div class="col-md-6">
+                    <p class="text-right required-field-legend">* Required fields</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <!--First Name-->
+                    <div class="form-group"
+                         ng-class="{ 'has-error':leadForm.FirstName.$invalid && !leadForm.FirstName.$pristine && leadForm.FirstName.$touched}">
+                        <label for="firstName"
+                               class="col-sm-4 control-label">First Name <span class="required-field-indicator">*</span></label>
+
+                        <div class="col-sm-8">
+                            <input type="text"
+                                   class="form-control"
+                                   name="FirstName"
+                                   id="FirstName"
+                                   placeholder=""
+                                   tabindex="1"
+                                   ng-model="homeownerVM.model.FirstName"
+                                   required>
+
+                            <p ng-show="leadForm.FirstName.$invalid && !leadForm.FirstName.$pristine && leadForm.FirstName.$touched"
+                               class="help-block">First Name is required.</p>
+                        </div>
+                    </div>
+                    <div class="form-group"
+                         ng-init="initializeAddressAutoComplete()"
+                         ng-class="{ 'has-error':leadForm.Street.$invalid && !leadForm.Street.$pristine && leadForm.Street.$touched}">
+                        <label for="Street"
+                               class="col-sm-4 control-label">Street Address <span class="required-field-indicator">*</span></label>
+
+                        <div class="col-sm-8">
+                            <input type="text"
+                                   class="form-control"
+                                   id="Street"
+                                   name="Street"
+                                   placeholder=""
+                                   ng-click="geolocate()"
+                                   tabindex="3"
+                                   ng-model="homeownerVM.model.StreetNumAndName"
+                                   maxlength="40"
+                                   ng-maxlength="40"
+                                   required>
+
+                            <p ng-show="leadForm.Street.$invalid && !leadForm.Street.$pristine && leadForm.Street.$touched"
+                               class="help-block">Street is required, up to 40 characters. </p>
+                        </div>
+                    </div>
+                    <!--City-->
+                    <div class="form-group"
+                         ng-class="{ 'has-error':leadForm.City.$invalid && !leadForm.City.$pristine && leadForm.City.$touched}">
+                        <label for="City"
+                               class="col-sm-4 control-label">Suburb <span class="required-field-indicator">*</span></label>
+
+                        <div class="col-sm-8">
+                            <input type="text"
+                                   class="form-control"
+                                   id="City"
+                                   name="City"
+                                   placeholder=""
+                                   tabindex="4"
+                                   maxlength="40"
+                                   ng-maxlength="40"
+                                   ng-model="homeownerVM.model.Suburb"
+                                   required>
+
+                            <p ng-show="leadForm.City.$invalid && !leadForm.City.$pristine && leadForm.City.$touched"
+                               class="help-block">City is required, up to 40 characters.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <!--Zip-->
+                        <div ng-class="{ 'has-error':leadForm.Zip.$invalid && !leadForm.Zip.$pristine && leadForm.Zip.$touched && leadForm.Zip.$touched}">
+                            <label for="Zip"
+                                   class="col-sm-4 control-label">Post Code <span class="required-field-indicator">*</span></label>
+
+                            <div class="col-sm-3">
+                                <input type="text"
+                                       class="form-control"
+                                       id="Zip"
+                                       name="Zip"
+                                       placeholder=""
+                                       tabindex="6"
+                                       ng-minlength="4"
+                                       ng-maxlength="4"
+                                       ng-model="homeownerVM.model.PostCode"
+                                       ng-pattern="/^\d+$/"
+                                       required>
+
+
+                                <p ng-show="leadForm.Zip.$error.minlength && !leadForm.Zip.$pristine && leadForm.Zip.$touched"
+                                   class="help-block">Zip is too short.</p>
+
+                                <p ng-show="leadForm.Zip.$error.maxlength && !leadForm.Zip.$pristine && leadForm.Zip.$touched"
+                                   class="help-block">Zip is too long.</p>
+
+                                <p ng-show="!leadForm.Zip.$error.minlength && !leadForm.Zip.$error.maxlength && !leadForm.Zip.$error.required && leadForm.Zip.$invalid && !leadForm.Zip.$pristine && leadForm.Zip.$touched"
+                                   class="help-block">Zip is invalid.</p>
+
+                                <p ng-show="leadForm.Zip.$error.required && !leadForm.Zip.$pristine && leadForm.Zip.$touched"
+                                   class="help-block">Zip is required.</p>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <!--Last Name-->
+                    <div class="form-group"
+                         ng-class="{ 'has-error':leadForm.LastName.$invalid && !leadForm.LastName.$pristine && leadForm.LastName.$touched}">
+                        <label for="LastName"
+                               class="col-sm-4 control-label">Last Name <span class="required-field-indicator">*</span></label>
+
+                        <div class="col-sm-8">
+                            <input type="text"
+                                   class="form-control"
+                                   id="LastName"
+                                   name="LastName"
+                                   placeholder=""
+                                   tabindex="2"
+                                   ng-model="homeownerVM.model.LastName"
+                                   required>
+
+                            <p ng-show="leadForm.LastName.$invalid && !leadForm.LastName.$pristine && leadForm.LastName.$touched"
+                               class="help-block">Last Name is required.</p>
+                        </div>
+                    </div>
+                    <!--Email-->
+                    <div class="form-group"
+                         ng-class="{ 'has-error':leadForm.Email.$invalid && !leadForm.Email.$pristine && leadForm.Email.$touched}">
+                        <label for="Email"
+                               class="col-sm-4 control-label">Email <span class="required-field-indicator">*</span></label>
+
+                        <div class="col-sm-8">
+                            <input type="text"
+                                   class="form-control"
+                                   id="Email"
+                                   name="Email"
+                                   placeholder=""
+                                   tabindex="7"
+                                   ng-pattern="/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/"
+                                   ng-model="homeownerVM.model.Email"
+                                   required>
+
+                            <p ng-show="!leadForm.Email.$error.required && leadForm.Email.$invalid && !leadForm.Email.$pristine && leadForm.Email.$touched"
+                               class="help-block">Email is invalid.</p>
+
+                            <p ng-show="leadForm.Email.$error.required && !leadForm.Email.$pristine && leadForm.Email.$touched"
+                               class="help-block">Email is required.</p>
+                        </div>
+                    </div>
+                    <!--HomePhone-->
+                    <div class="form-group"
+                         ng-class="{ 'has-error':leadForm.HomePhone.$invalid && !leadForm.HomePhone.$pristine && leadForm.HomePhone.$touched}">
+                        <label for="HomePhone"
+                               class="col-sm-4 control-label">Phone <span class="required-field-indicator">*</span></label>
+
+                        <div class="col-sm-8">
+                            <input type="text"
+                                   class="form-control"
+                                   id="HomePhone"
+                                   name="HomePhone"
+                                   tabindex="8"
+                                   required
+                                   ui-mask="(9999) 999-999"
+                                   ng-model="homeownerVM.model.Phone">
+
+                            <p ng-show="!leadForm.HomePhone.$error.required && leadForm.HomePhone.$invalid && !leadForm.HomePhone.$pristine && leadForm.HomePhone.$touched"
+                               class="help-block">Phone is invalid.</p>
+
+                            <p ng-show="leadForm.HomePhone.$error.required && !leadForm.HomePhone.$pristine && leadForm.HomePhone.$touched"
+                               class="help-block">Phone is required.</p>
+                        </div>
+                    </div>
+                    <!--div class="form-group"
+                         ng-class="{ 'has-error':leadForm.PaymentPlan.$invalid && !leadForm.PaymentPlan.$pristine && leadForm.PaymentPlan.$touched}">
+                        <label for="PaymentPlan"
+                               class="col-sm-4 control-label">Payment Plan</label>
+
+                        <div class="col-sm-3">
+                            <select class="form-control"
+                                    id="PlanOption"
+                                    name="PlanOption"
+                                    tabindex="15"
+                                    ng-model="homeownerVM.model.PlanOption">
+                                <option value="15 years - 0%">15 years - 0%</option>
+                                <option value="15 years - 2%">15 years - 2%</option>                    
+                            </select>
+                        </div>
+                    </div-->
+                </div>
+            </div>            
+            <br>           
+            <br/>            
+            <h4 class="section-label">Eligibility for Energy Plan</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group"
+                         ng-class="{ 'has-error':leadForm.Age.$invalid && !leadForm.Age.$pristine && leadForm.Age.$touched}">
+                        <div class="col-sm-1">
+                            <input id="Age" name="Age" class="form-control" type="checkbox" ng-model="homeownerVM.model.Eligibility.isOver18yo">                         
+                        </div>
+                        <label for="Age"
+                               class="col-sm-5 control-label">Over 18 years of age?</label>                       
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group"
+                         ng-class="{ 'has-error':leadForm.Bill.$invalid && !leadForm.Bill.$pristine && leadForm.Bill.$touched}">
+                        <div class="col-sm-1">
+                            <input id="Age" name="Bill" class="form-control" type="checkbox" ng-model="homeownerVM.model.Eligibility.isAbleToProvidePowerBill">                         
+                        </div>
+                        <label for="Bill"
+                               class="col-sm-9 control-label">Able to provide current power bill that is not in arrears?</label>                       
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group"
+                         ng-class="{ 'has-error':leadForm.PR.$invalid && !leadForm.PR.$pristine && leadForm.PR.$touched}">
+                        <div class="col-sm-1">
+                            <input id="PR" name="PR" class="form-control" type="checkbox" ng-model="homeownerVM.model.Eligibility.isAuCitizenOrPR">                         
+                        </div>
+                        <label for="PR"
+                               class="col-sm-9 control-label">An Australian citizen or permanent resident?</label>                       
+                    </div>
+                </div>            
+                <div class="col-md-6">
+                    <div class="form-group"
+                         ng-class="{ 'has-error':leadForm.PR.$invalid && !leadForm.PR.$pristine && leadForm.PR.$touched}">
+                        <div class="col-sm-1">
+                            <input id="PR" name="PR" class="form-control" type="checkbox" ng-model="homeownerVM.model.Eligibility.isForPersonalUse">                         
+                        </div>
+                        <label for="Bill"
+                               class="col-sm-9 control-label">Intending to use solar power for predominately personal, domestic & personal use?</label>                       
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group"
+                         ng-class="{ 'has-error':leadForm.HomeOwner.$invalid && !leadForm.HomeOwner.$pristine && leadForm.HomeOwner.$touched}">
+                        <div class="col-sm-1">
+                            <input id="HomeOwner" name="HomeOwner" class="form-control" type="checkbox" ng-model="homeownerVM.model.Eligibility.isLegalHomeowner">                         
+                        </div>
+                        <label for="HomeOwner"
+                               class="col-sm-9 control-label">The legal homeowner and occupant?</label>                       
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group"
+                         ng-class="{ 'has-error':leadForm.HasID.$invalid && !leadForm.HasID.$pristine && leadForm.HasID.$touched}">
+                        <div class="col-sm-1">
+                            <input id="HasID" name="HasID" class="form-control" type="checkbox" ng-model="homeownerVM.model.Eligibility.isAbleToProvideID">                         
+                        </div>
+                        <label for="HasID"
+                               class="col-sm-9 control-label">Able to provide I.D.?</label>                       
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group"
+                         ng-class="{ 'has-error':leadForm.GoodCredit.$invalid && !leadForm.GoodCredit.$pristine && leadForm.GoodCredit.$touched}">
+                        <div class="col-sm-1">
+                            <input id="GoodCredit" name="GoodCredit" class="form-control" type="checkbox" ng-model="homeownerVM.model.Eligibility.hasGoodCreditHistory">                         
+                        </div>
+                        <label for="GoodCredit"
+                               class="col-sm-9 control-label">Have good credit history?</label>                       
+                    </div>
+                </div>
+            </div>
+            <br>            
+        </div>       
+        <div class="modal-body animate-show" ng-show="homeownerVM.displayPhase === 'tariffDetails'">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="section-label">Bill Breakdown</h4>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="section-label">Energy Tariff</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="bill"
+                               class="col-sm-4 control-label">Bill (or) Estimate </label>
+
+                        <div class="col-sm-8">
+                            <select class="form-control"
+                                    id="BillOrEstimate"
+                                    name="BillOrEstimate"
+                                    tabindex="15"
+                                    ng-change="getDefaultBillCycleType()"
+                                    ng-model="homeownerVM.model.BillOrEstimate">
+                                <!--option value=""></option -->
+                                <option value="I have a Bill">I have a Bill</option>
+                                <option value="Estimate a Bill">Estimate a Bill</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group"
+                                 ng-class="{'has-error':!DailyKwhConsumptionValid || (leadForm.DailyKwhConsumption.$invalid && !leadForm.DailyKwhConsumption.$pristine && leadForm.DailyKwhConsumption.$touched && leadForm.BillAmount.$invalid && !leadForm.BillAmount.$pristine && leadForm.BillAmount.$touched)||(leadForm.DailyKwhConsumption.$invalid && leadForm.BillOrEstimate.$viewValue === 'I have a Bill')}">
+                                <label for="DailyConsumption"
+                                       class="col-sm-8 control-label">Daily electricity consumption<span class="required-field-indicator">*</span> (kWh)</label>
+                                <div class="col-sm-4">
+                                    <input type="text"
+                                           class="form-control"
+                                           id="DailyKwhConsumption"
+                                           name="DailyKwhConsumption"                                   
+                                           ng-model="homeownerVM.model.DailyKwhConsumption"
+                                           ng-change="validateDailyKwhConsumption(homeownerVM.model.DailyKwhConsumption)"
+                                           required
+                                           tabindex="14">
+                                    <p ng-show="(leadForm.DailyKwhConsumption.$invalid && !leadForm.DailyKwhConsumption.$pristine && leadForm.DailyKwhConsumption.$touched && leadForm.BillAmount.$invalid && !leadForm.BillAmount.$pristine && leadForm.BillAmount.$touched)||(leadForm.DailyKwhConsumption.$invalid && leadForm.BillOrEstimate.$viewValue === 'I have a Bill')"
+                                       class="help-block">Daily Kwh Consumption or Bill Amount is required.</p>
+                                    <p ng-show="(!DailyKwhConsumptionValid)"
+                                       class="help-block">Invalid Daily Kwh Consumption</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group"
+                                 ng-class="{ 'has-error': !BillAmountValid || (leadForm.BillAmount.$invalid && !leadForm.BillAmount.$pristine && leadForm.BillAmount.$touched && leadForm.DailyKwhConsumption.$invalid && !leadForm.DailyKwhConsumption.$pristine && leadForm.DailyKwhConsumption.$touched)}">
+                                <label for="DailyConsumption"
+                                       class="col-sm-8 control-label">Whats your electricity bill<span class="required-field-indicator">*</span> ($)</label>
+
+                                <div class="col-sm-4">
+                                    <input type="text"
+                                           class="form-control"
+                                           id="BillAmount"
+                                           name="BillAmount"                                  
+                                           ng-model="homeownerVM.model.BillAmount"
+                                           ng-change="validateBillAmount(homeownerVM.model.BillAmount)"
+                                           required
+                                           tabindex="14">
+                                    <p ng-show="(leadForm.BillAmount.$invalid && !leadForm.BillAmount.$pristine && leadForm.BillAmount.$touched && leadForm.DailyKwhConsumption.$invalid && !leadForm.DailyKwhConsumption.$pristine && leadForm.DailyKwhConsumption.$touched)"
+                                       class="help-block">Bill Amount or Daily Kwh Consumption is required.</p>
+                                    <p ng-show="(!BillAmountValid)"
+                                       class="help-block">Invalid bill amount</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                                    
+
+                    <div class="form-group">
+                        <label for="BillCycleType"
+                               class="col-sm-4 control-label">Bill Cycle Type</label>
+
+                        <div class="col-sm-8">
+                            <select class="form-control"
+                                    id="BillCycleType"
+                                    name="BillCycleType"
+                                    tabindex="15"
+                                    ng-model="homeownerVM.model.BillCycle">
+                                <option ng-repeat="billCycleType in billCycleTypeList">{{billCycleType}}</option>                                
+                            </select>                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <!--Last Name-->
+                    <div class="form-group">
+                        <label for="EnergyDistributor"
+                               class="col-sm-4 control-label">Energy Distributor </label>
+
+                        <div class="col-sm-8">
+                            <select class="form-control"
+                                    id="ElectricityDistributor"
+                                    name="ElectricityDistributor"
+                                    tabindex="15"
+                                    required
+                                    ng-change="getRetailerTariffDetailsByDistributor()"
+                                    ng-model="homeownerVM.model.ElectricityDistributor"
+                                    ng-show="electricityDistributorList.length > 0">
+                                <option ng-repeat="electricityDistributor in electricityDistributorList">{{electricityDistributor}}</option>
+                            </select>
+			    <input type="text"
+                                   class="form-control"
+                                   name="ElectricityDistributor"
+                                   id="ElectricityDistributor"
+                                   placeholder=""
+                                   tabindex="1"
+                                   disabled="true"
+                                   ng-hide="electricityDistributorList.length > 0"
+                                   ng-model="homeownerVM.model.ElectricityDistributor"/>
+                        </div>
+                    </div>
+                    <!--Email-->
+                    <div class="form-group">
+                        <label for="EnergyRetailer"
+                               class="col-sm-4 control-label">Energy Retailer</label>
+
+                        <div class="col-sm-8">
+                            <select class="form-control"
+                                    id="ElectricityRetailer"
+                                    name="ElectricityRetailer"
+                                    tabindex="15"
+                                    ng-model="homeownerVM.model.ElectricityRetailer"
+                                    ng-change="getMeterTypeByRetailer()"
+                                    ng-show="electricityRetailerList.length > 0">
+                                <option ng-repeat="electricityRetailer in electricityRetailerList">{{electricityRetailer}}</option>
+                            </select>
+                            <input type="text"
+                                   class="form-control"
+                                   name="ElectricityRetailer"
+                                   id="ElectricityRetailer"
+                                   placeholder=""
+                                   tabindex="1"
+                                   disabled="true"
+                                   ng-hide="electricityRetailerList.length > 0"
+                                   ng-model="homeownerVM.model.ElectricityRetailer"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="MeterType"
+                               class="col-sm-4 control-label">Metering Type </label>
+
+                        <div class="col-sm-8">
+                            <select class="form-control"
+                                    id="MeterType"
+                                    name="MeterType"
+                                    tabindex="15"
+                                    ng-model="homeownerVM.model.MeterType"
+                                    ng-change="getTariffNamesByMeterType()"
+                                    ng-show="meterTypeList.length > 0">
+                                <option ng-repeat="meterType in meterTypeList">{{meterType}}</option>
+                            </select>
+                            <input type="text"
+                                   class="form-control"
+                                   name="MeterType"
+                                   id="MeterType"
+                                   placeholder=""
+                                   tabindex="1"
+                                   disabled="true"
+                                   ng-hide="meterTypeList.length > 0"
+                                   ng-model="homeownerVM.model.MeterType"/>
+                        </div>
+                    </div>
+                    <!--HomePhone-->
+                    <div class="form-group">
+                        <label for="TariffName"
+                               class="col-sm-4 control-label">Tariff Name</label>
+                        <div class="col-sm-8">
+                            <!--<select class="form-control"
+                                    id="TariffName"
+                                    name="TariffName"
+                                    tabindex="15"
+                                    required
+                                    ng-options="tariffName.id for tariffName in tariffNames"
+                                    ng-show="tariffNames.length > 0"
+                                    ng-model="id">
+                                <option ng-repeat="tariffName in tariffNames" value="{{tariffName.id}}" ng-selected="tariffName.id === homeownerVM.model.TariffId">{{tariffName.name}}</option>
+                            </select>-->
+                            <select class="form-control" 
+                                name="TariffName"
+                                ng-show="tariffNames.length > 0"    
+                                ng-model="homeownerVM.model.TariffId"
+                                ng-init="homeownerVM.model.TariffId"
+                                ng-options="tariffName.id as tariffName.name for tariffName in tariffNames"
+                                required>
+                            </select> 
+                            <input type="text"
+                                   class="form-control"
+                                   name="TariffNameInText"
+                                   id="TariffName"
+                                   placeholder=""
+                                   tabindex="1"
+                                   disabled="true"
+                                   ng-hide="tariffNames.length > 0"
+                                   ng-model="homeownerVM.model.TariffName"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr width="100%">
+            <div class="row" style="float: right; padding-right: 1%;">
+
+                <button class="btn btn-primary" ng-show="homeownerVM.displayPhase === 'tariffDetails'"
+                        tabindex="17"
+                        ng-click="getTariffDetails()"
+                        ng-disabled="getTariffInProcess || setTariffInProcess || leadForm.ElectricityDistributor.$invalid || homeownerVM.model.TariffId === undefined || leadForm.TariffName.$invalid" >
+                    <span us-spinner="spinnerOptions"
+                          id="modal-spinner"
+                          ng-show="getTariffInProcess"
+                          spinner-key="modal-spinner"></span>
+                    <span ng-show="getTariffInProcess">Retrieving...</span>
+                    <span ng-show="!getTariffInProcess">Retrieve Tariff Details</span>
+                </button>
+                <span>{{$('#TariffName').val()}}</span>
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="section-label">Tariff Details</h4>
+                </div>                
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group" ng-class="{ 'has-error':leadForm.SupplyChargeCents.$invalid && !leadForm.SupplyChargeCents.$pristine && leadForm.SupplyChargeCents.$touched }">
+                        <label for="SupplyChargeCents"
+                               class="col-sm-4 control-label">Supply Charge (Cents) <span class="required-field-indicator">*</span></label>
+
+                        <div class="col-sm-8">
+                            <input type="text"
+                                   class="form-control"
+                                   name="SupplyChargeCents"
+                                   id="SupplyChargeCents"
+                                   placeholder=""
+                                   tabindex="1"
+                                   required
+                                   ng-model="homeownerVM.model.Tariff.supplyChargeCents">
+                            <p ng-show="leadForm.SupplyChargeCents.$invalid && !leadForm.SupplyChargeCents.$pristine && leadForm.SupplyChargeCents.$touched"
+                                       class="help-block">Supply Charge is required.</p>                           
+                        </div>
+                    </div>
+                </div>               
+                <div class="col-md-6">
+                    <div class="form-group" ng-class="{ 'has-error':leadForm.TimeStructure.$invalid && !leadForm.TimeStructure.$pristine && leadForm.TimeStructure.$touched }">
+                        <label for="TimeStructure"
+                               class="col-sm-4 control-label">Time Structure </label>
+
+                        <div class="col-sm-8">
+                            <input type="text"
+                                   class="form-control"
+                                   name="TimeStructure"
+                                   id="TimeStructure"
+                                   placeholder=""
+                                   tabindex="1"
+                                   required
+                                   disabled="true"
+                                   ng-model="homeownerVM.model.Tariff.timeStructure">
+                            <p ng-show="leadForm.TimeStructure.$invalid && !leadForm.TimeStructure.$pristine && leadForm.TimeStructure.$touched"
+                                       class="help-block">Time Structure is required.</p> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>            
+            <div class="row">
+                <div class="col-md-2">            
+                    <div class="form-group" ng-class="{ 'has-error':leadForm.PeakRate1.$invalid && !leadForm.PeakRate1.$pristine && leadForm.PeakRate1.$touched }">
+                        <label for="PeakRate1"
+                               class="col-sm-5 control-label">Peak Rate 1</label>
+
+                        <div class="col-sm-7">
+                            <input type="text"
+                                   class="form-control"
+                                   name="PeakRate1"
+                                   id="PeakRate1"
+                                   placeholder=""
+                                   tabindex="1"
+                                   required
+                                   ng-pattern="/^[0-9]+(\.[0-9]{1,5})?$/"
+                                   ng-model="homeownerVM.model.Tariff.peakRate1">
+                            <p ng-show="leadForm.PeakRate1.$error.required && leadForm.PeakRate1.$invalid && !leadForm.PeakRate1.$pristine && leadForm.PeakRate1.$touched"
+                                       class="help-block">Peak Rate 1 is required.</p>
+                            <p ng-show="!leadForm.PeakRate1.$error.required && leadForm.PeakRate1.$invalid && !leadForm.PeakRate1.$pristine && leadForm.PeakRate1.$touched"
+                               class="help-block">Peak Rate 1 is invalid.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">            
+                    <div class="form-group" ng-class="{ 'has-error':leadForm.PeakBlock1.$invalid && !leadForm.PeakBlock1.$pristine && leadForm.PeakBlock1.$touched }">
+                        <label for="PeakBlock1"
+                               class="col-sm-5 control-label">Peak Block 1</label>
+
+                        <div class="col-sm-7">
+                            <input type="text"
+                                   class="form-control"
+                                   name="PeakBlock1"
+                                   id="PeakBlock1"
+                                   placeholder=""
+                                   tabindex="1"
+				   ng-pattern="/^\d+$/"
+                                   required
+                                   ng-model="homeownerVM.model.Tariff.peakBlock1">
+                            <p ng-show="leadForm.PeakBlock1.$error.required && leadForm.PeakBlock1.$error.required && leadForm.PeakBlock1.$invalid && !leadForm.PeakBlock1.$pristine && leadForm.PeakBlock1.$touched"
+                                       class="help-block">Peak Block 1 is required.</p>
+                            <p ng-show="!leadForm.PeakBlock1.$error.required && leadForm.PeakBlock1.$invalid && !leadForm.PeakBlock1.$pristine && leadForm.PeakBlock1.$touched"
+                               class="help-block">Peak Block 1 is invalid.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">            
+                    <div class="form-group" ng-class="{ 'has-error':leadForm.Shoulder1.$invalid && !leadForm.Shoulder1.$pristine && leadForm.Shoulder1.$touched }">
+                        <label for="Shoulder1"
+                               class="col-sm-4 control-label">Shoulder </label>
+
+                        <div class="col-sm-7">
+                            <input type="text"
+                                   class="form-control"
+                                   name="Shoulder1"
+                                   id="Shoulder1"
+                                   placeholder=""
+                                   tabindex="1"
+                                   required
+                                   ng-model="homeownerVM.model.Tariff.shoulder1">
+                            <p ng-show="leadForm.Shoulder1.$invalid && !leadForm.Shoulder1.$pristine && leadForm.Shoulder1.$touched"
+                                       class="help-block">Shoulder is required.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">            
+                    <div class="form-group" ng-class="{ 'has-error':leadForm.OffPeakRate.$invalid && !leadForm.OffPeakRate.$pristine && leadForm.OffPeakRate.$touched }">
+                        <label for="OffPeakRate"
+                               class="col-sm-6 control-label">Off Peak Rate </label>
+
+                        <div class="col-sm-6">
+                            <input type="text"
+                                   class="form-control"
+                                   name="OffPeakRate"
+                                   id="OffPeakRate"
+                                   placeholder=""
+                                   tabindex="1"
+                                   required
+                                   ng-model="homeownerVM.model.Tariff.peakOffpeakRate">
+                            <p ng-show="leadForm.OffPeakRate.$invalid && !leadForm.OffPeakRate.$pristine && leadForm.OffPeakRate.$touched"
+                                       class="help-block">Off Peak Rate is required.</p>
+                        </div>
+                    </div>
+                </div>              
+            </div>
+            <div class="row">
+                <div class="col-md-2">            
+                    <div class="form-group" ng-class="{ 'has-error':leadForm.PeakRate2.$invalid && !leadForm.PeakRate2.$pristine && leadForm.PeakRate2.$touched }">
+                        <label for="PeakRate2"
+                               class="col-sm-5 control-label">Peak Rate 2</label>
+
+                        <div class="col-sm-7">
+                            <input type="text"
+                                   class="form-control"
+                                   name="PeakRate2"
+                                   id="PeakRate2"
+                                   placeholder=""
+                                   tabindex="1"
+                                   ng-pattern="/^[0-9]+(\.[0-9]{1,5})?$/"
+                                   required
+                                   ng-model="homeownerVM.model.Tariff.peakRate2">
+                            <p ng-show="leadForm.PeakRate2.$error.required && leadForm.PeakRate2.$invalid && !leadForm.PeakRate2.$pristine && leadForm.PeakRate2.$touched"
+                                       class="help-block">Peak Rate 2 is required.</p>
+                            <p ng-show="!leadForm.PeakRate2.$error.required && leadForm.PeakRate2.$invalid && !leadForm.PeakRate2.$pristine && leadForm.PeakRate2.$touched"
+                               class="help-block">Peak Rate 2 is invalid.</p>                        
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">            
+                    <div class="form-group" ng-class="{ 'has-error':leadForm.PeakBlock2.$invalid && !leadForm.PeakBlock2.$pristine && leadForm.PeakBlock2.$touched }">
+                        <label for="PeakBlock2"
+                               class="col-sm-5 control-label">Peak Block 2</label>
+
+                        <div class="col-sm-7">
+                            <input type="text"
+                                   class="form-control"
+                                   name="PeakBlock2"
+                                   id="PeakBlock2"
+                                   placeholder=""
+                                   tabindex="1"
+                                   ng-pattern="/^\d+$/"
+                                   required
+                                   ng-model="homeownerVM.model.Tariff.peakBlock2">
+                            <p ng-show="leadForm.PeakBlock2.$error.required && leadForm.PeakBlock2.$invalid && !leadForm.PeakBlock2.$pristine && leadForm.PeakBlock2.$touched"
+                                       class="help-block">Peak Block 2 is required.</p>
+                            <p ng-show="!leadForm.PeakBlock2.$error.required && leadForm.PeakBlock2.$invalid && !leadForm.PeakBlock2.$pristine && leadForm.PeakBlock2.$touched"
+                                class="help-block">Peak Block 2 is invalid.</p>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            <div class="row">
+                <div class="col-md-2">            
+                    <div class="form-group" ng-class="{ 'has-error':leadForm.PeakRate3.$invalid && !leadForm.PeakRate3.$pristine && leadForm.PeakRate3.$touched }">
+                        <label for="PeakRate3"
+                               class="col-sm-5 control-label">Peak Rate 3</label>
+
+                        <div class="col-sm-7">
+                            <input type="text"
+                                   class="form-control"
+                                   name="PeakRate3"
+                                   id="PeakRate3"
+                                   placeholder=""
+                                   tabindex="1"
+                                   ng-pattern="/^[0-9]+(\.[0-9]{1,5})?$/"
+                                   required
+                                   ng-model="homeownerVM.model.Tariff.peakRate3">
+                            <p ng-show="leadForm.PeakRate3.$error.required && leadForm.PeakRate3.$invalid && !leadForm.PeakRate3.$pristine && leadForm.PeakRate3.$touched"
+                                       class="help-block">Peak Rate 3 is required.</p>
+                            <p ng-show="!leadForm.PeakRate3.$error.required && leadForm.PeakRate3.$invalid && !leadForm.PeakRate3.$pristine && leadForm.PeakRate3.$touched"
+                               class="help-block">Peak Rate 3 is invalid.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">            
+                    <div class="form-group" ng-class="{ 'has-error':leadForm.PeakBlock3.$invalid && !leadForm.PeakBlock3.$pristine && leadForm.PeakBlock3.$touched }">
+                        <label for="PeakBlock3"
+                               class="col-sm-5 control-label">Peak Block 3</label>
+
+                        <div class="col-sm-7">
+                            <input type="text"
+                                   class="form-control"
+                                   name="PeakBlock3"
+                                   id="PeakBlock3"
+                                   placeholder=""
+                                   tabindex="1"
+                                   required
+                                   ng-pattern="/^\d+$/"
+                                   ng-model="homeownerVM.model.Tariff.peakBlock3">
+                            <p ng-show="leadForm.PeakBlock3.$error.required && leadForm.PeakBlock3.$invalid && !leadForm.PeakBlock3.$pristine && leadForm.PeakBlock3.$touched"
+                                       class="help-block">Peak Block 3 is required.</p>
+                            <p ng-show="!leadForm.PeakBlock3.$error.required && leadForm.PeakBlock3.$invalid && !leadForm.PeakBlock3.$pristine && leadForm.PeakBlock3.$touched"
+                               class="help-block">Peak Block 3 is invalid.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+            <div class="row">               
+                <div class="col-md-2">            
+                    <div class="form-group" ng-class="{ 'has-error':leadForm.FitRate.$invalid && !leadForm.FitRate.$pristine && leadForm.FitRate.$touched }">
+                        <label for="FitRate"
+                               class="col-sm-5 control-label">Fit Rate<span class="required-field-indicator">*</span></label>
+
+                        <div class="col-sm-7">
+                            <input type="text"
+                                   class="form-control"
+                                   name="FitRate"
+                                   id="FitRate"
+                                   placeholder=""
+                                   tabindex="1"                                   
+                                   required
+                                   ng-pattern="/^[0-9]+(\.[0-9]{1,5})?$/"
+                                   ng-model="homeownerVM.model.SolarTariffRate.fitRate">
+                            <p ng-show="leadForm.FitRate.$error.required && leadForm.FitRate.$invalid && !leadForm.FitRate.$pristine && leadForm.FitRate.$touched"
+                                       class="help-block">Fit Rate is required.</p>
+                            <p ng-show="!leadForm.FitRate.$error.required && leadForm.FitRate.$invalid && !leadForm.FitRate.$pristine && leadForm.FitRate.$touched"
+                               class="help-block">Fit Rate is invalid.</p>
+                        </div>
+                    </div>
+                </div>                         
+            </div>             
+        </div>
+        <br>
+        </div>
+
+        <div class="modal-footer" ng-switch="isProdEnv">
+
+            <button class="btn btn-primary" ng-show="homeownerVM.displayPhase === 'editOpportunity' || homeownerVM.displayPhase === 'createOpportunity'"
+                    tabindex="17"
+                    ng-click="ok()"
+                    ng-disabled="leadFormInProcess || leadForm.FirstName.$invalid || leadForm.Street.$invalid || leadForm.City.$invalid || leadForm.LastName.$invalid || leadForm.Email.$invalid || leadForm.HomePhone.$invalid || leadForm.Zip.$invalid">
+                <span us-spinner="spinnerOptions"
+                      id="modal-spinner"
+                      ng-show="leadFormInProcess"
+                      spinner-key="modal-spinner"></span>
+                <span ng-show="leadFormInProcess">Saving...</span>
+                <span ng-show="!leadFormInProcess">Save and Continue</span>
+            </button>
+            <button class="btn btn-primary" ng-show="homeownerVM.displayPhase === 'tariffDetails'"
+                    tabindex="17"
+                    ng-click="changeDisplayPhase()">                
+                <span>Back</span>
+            </button>
+            <button class="btn btn-primary" ng-show="homeownerVM.displayPhase === 'tariffDetails'"
+                    tabindex="17"
+                    ng-click="setTariffDetails(homeownerVM)"
+                    ng-disabled="setTariffInProcess || getTariffInProcess || !BillAmountValid || !DailyKwhConsumptionValid || ((leadForm.DailyKwhConsumption.$invalid && leadForm.BillAmount.$invalid) || leadForm.SupplyChargeCents.$invalid ||
+                                leadForm.TimeStructure.$invalid || leadForm.Shoulder1.$invalid || leadForm.OffPeakRate.$invalid || leadForm.PeakRate1.$invalid ||
+                                leadForm.PeakBlock1.$invalid || leadForm.PeakRate2.$invalid || leadForm.PeakBlock2.$invalid || leadForm.PeakRate3.$invalid || leadForm.PeakBlock3.$invalid ||
+                                leadForm.PeakRate4.$invalid || leadForm.PeakBlock4.$invalid) || homeownerVM.model.TariffId === undefined ||(leadForm.DailyKwhConsumption.$invalid && leadForm.BillOrEstimate.$viewValue === 'I have a Bill') || leadForm.FitRate.$invalid">
+                <span us-spinner="spinnerOptions"
+                      id="modal-spinner"
+                      ng-show="setTariffInProcess"
+                      spinner-key="modal-spinner"></span>
+                <span ng-show="setTariffInProcess">Saving...</span>
+                <span ng-show="!setTariffInProcess">Save and Continue</span>				
+            </button>            
+        </div>
+    </form>
+</div>

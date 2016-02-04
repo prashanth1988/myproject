@@ -1,0 +1,83 @@
+<div class="container-fluid"
+     id="homepage">
+    <div class="row" id="map-news-row">
+        <div class="solarNewsColumn">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading home-panel-heading">
+                            <h4>Solar News</h4>
+                        </div>
+                        <div class="list-group">
+                            <a class="list-group-item"
+                               href="http://www.usatoday.com/story/news/nation/2014/11/24/solar-power-report/70027228/">
+                                Solar power charging ahead in America
+                            </a>
+                            <a class="list-group-item"
+                               href="http://dealbook.nytimes.com/2014/11/17/sunedison-and-terraform-to-buy-first-wind-for-2-4-billion-in-renewable-energy-deal/?smid=tw-share&_r=0">
+                                SunEdison and TerraForm Buy First Wind, Gaining a Toehold in Turbines
+                            </a>
+                            <a class="list-group-item"
+                               href="http://www.bostonglobe.com/business/2014/11/24/renewable-energy-starts-win-price/1qaykTeSKnfZSf5UZoLwfN/story.html">
+                                Renewable energy starting to win on price
+                            </a>
+                            <a class="list-group-item"
+                               href="http://seekingalpha.com/article/2721755-sunedison-emerging-solar-powerhouse">
+                                SunEdison: Emerging Solar Powerhouse
+                            </a>
+                            <a class="list-group-item"
+                               href="http://www.utilitydive.com/news/a-whole-new-kind-of-renewables-business-inside-the-sunedison-first-wind-de/336381/">
+                                A whole new kind of renewables business: Inside the SunEdison-First Wind deal
+                            </a>
+                            <a class="list-group-item"
+                               href="http://azcapitoltimes.com/news/2014/12/01/solar-is-here-its-expanding-and-its-popularity-is-growing/#ixzz3KgefAvvS">
+                                Solar is here, it’s expanding and its popularity is growing
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="homePageMapViewWrapper"
+             class="homePageMap">
+            <ng-include src="'app/main/homeowner-map.html'"
+                        ng-controller="HomeownerMapCtrl as homeownerMap"></ng-include>
+
+        </div>
+        <!-- Has to be changed and moved out of HTML -->
+        <script type="text/javascript">
+            function resize()
+            {
+                var mapHeight = $('#homePageMapViewWrapper').height();
+                var newsArticles = $(".list-group-item");
+                var newsBlockHeight = (mapHeight - 40)/newsArticles.length;
+                for(i=0; i<newsArticles.length; i++){
+                    newsArticles[i].style.height = newsBlockHeight + "px";
+                }
+            }
+            resize();
+            window.onresize = function() {
+                resize();
+            };
+        </script>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading home-panel-heading clearfix prospects-heading">
+                    <div class="row">
+                        <div class="col-md-10"><h3>Prospects</h3></div><!--
+                        --><div class="col-md-2">
+                            <div class="btn-group pull-right">
+                                <a ui-sref="homeowners"
+                                   id="viewMoreHomeowners">VIEW MORE</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ng-include src="'app/main/homeowner-table.html'"
+                            ng-controller="HomeownerList as homeownerList"></ng-include>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,126 @@
+<nav class="navbar navbar-default"
+     role="navigation"
+     ng-class="{'isExec': nav.isExec}">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button"
+                    class="navbar-toggle"
+                    data-toggle="collapse"
+                    data-target="#main-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand"
+               id="nav-tenantName">
+                <img src="assets/images/SunEdison-Logo.png"
+                     alt="SunEdison Partner Portal"/>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse"
+             id="main-navbar-collapse">
+            <ul class="nav navbar-nav"
+                id="nav-menuList">
+                <!--Shortcuts Dropdown-->
+                <li class="dropdown"
+                    id="shortcuts-menu">
+                    <!--a id="link-menu"
+                       role="button"
+                       data-toggle="dropdown">
+                        <i class="fa fa-link"></i>
+                        <span class="menu-label-text">Shortcuts</span>
+                        <span class="caret"></span>
+                    </a-->
+                    <ul class="dropdown-menu ss-directup"
+                        role="menu"
+                        aria-labelledby="help-menu">
+                        <li class="header">Shortcuts</li>
+                        <li ng-show="nav.isExec">
+                            <a id="shortcut-sunedison-mdf"
+                               href="http://www.sunedisonMDF.com"
+                               target="_blank">SunEdison MDF</a>
+                        </li>
+                        <li>
+                            <a id="shortcut-sunedison-documentation"
+                               href="https://suned.box.com/s/vs4elxlpg113prdef1l8"
+                               target="_blank">SunEdison Documentation</a>
+                        </li>
+                        <li>
+                            <a id="shortcut-sunedison-university"
+                               href="https://www.brainshark.com/brainshark/public/login/m/login.asp?companyid=30804"
+                               target="_blank">SunEdison University</a>
+                        </li>
+                        <li>
+                            <a id="shortcut-upcoming-product-webinars"
+                               href="http://www.brainshark.com/EchoFirst/Webinars_schedule/zHNzDFcCtz2YwZz0"
+                               target="_blank">Upcoming Product Webinars</a>
+                        </li>
+                        <li>
+                            <a id="shortcut-sunedison-solar-monitoring-solution"
+                               href="http://echosolar.com"
+                               target="_blank">SunEdison Solar Monitoring Solution</a>
+                        </li>
+                    </ul>
+                </li>
+                <!--User Dropdown-->
+                <li class="dropdown"
+                    id="user-menu">
+                    <a id="menu"
+                       style="padding-left: 10px; padding-right: 10px;"
+                       role="button"
+                       data-toggle="dropdown">
+                        <i class="fa fa-user"></i>
+                        <span class="menu-label-text">{{nav.user.profile.firstName}} {{nav.user.profile.lastName}}</span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu ss-directup"
+                        role="menu"
+                        aria-labelledby="help-menu">
+                        <li class="header">User Menu</li>
+                        <li>
+                            <a ng-click="nav.logout()"
+                               target="_blank">Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<nav class="secondary-navigation"
+     role="navigation">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pull-left">
+                    <div class="left-navigation-container">
+                        <!--span>
+                            <a ui-sref="homepage" ng-class="{ active: $state.includes('homepage') }" >Home</a>
+                        </span-->
+                        <span>
+                            <a ui-sref="homeowners" ng-class="{ active: $state.includes('homeowners') || $state.includes('map') }">Sales Dashboard</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" ng-hide="true">
+                <div class="pull-right">
+                    <div class="right-navigation-container">
+                        <div id="lead-button"
+                                ng-click="nav.openCreateLeadModal()">
+                            <i class="fa fa-plus"></i>
+                            <span>Lead</span>
+                            <span class="hide one"></span>
+                            <span class="hide two"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+

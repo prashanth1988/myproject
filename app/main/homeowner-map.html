@@ -1,0 +1,135 @@
+<div class="map-container" ng-if="homeownerMap.shouldShowMap">
+    <div id="searchBoxParent">
+        <button type="button"
+                class="map-search-button btn btn-default pull-right"
+                ng-click="homeownerMap.searchButtonHandler()">
+            <span class="glyphicon glyphicon-search"></span>
+        </button>
+    </div>
+    <ui-gmap-google-map draggable="true"
+                        center="homeownerMap.map.center"
+                        bounds="homeownerMap.map.bounds"
+                        zoom="homeownerMap.map.zoom"
+                        options="homeownerMap.map.options"
+                        events="homeownerMap.map.events"
+                        control="homeownerMap.map.control">
+        <ui-gmap-search-box template="homeownerMap.searchbox.template"
+                            parentdiv="homeownerMap.searchbox.parentDivId"
+                            position="homeownerMap.searchbox.position"
+                            options="homeownerMap.searchbox.options"
+                            events="homeownerMap.searchbox.events"
+                            bounds="homeownerMap.searchbox.bounds"></ui-gmap-search-box>
+        <ui-gmap-markers
+                models="homeownerMap.vmsWithGeoData"
+                coords="'location'"
+                fit="false"
+                icon="'prospectIcon'"
+                events="homeownerMap.markerEvents"
+                idkey="'id'">
+            <ui-gmap-windows
+                    show="'show'"
+                    closeClick="'windowClosed'"
+                    ng-cloak>
+                <div class="homeowner-summary-window panel">
+                    <div class="panel-heading clearfix">
+                        <div class="panel-title" ng-non-bindable>{{model.FirstName}}
+                            {{model.LastName}}
+                        </div>
+                        <div ng-controller="HomeownerWindowCtrl">
+                            <a ng-click="editHomeownerFromWindow()" class="edit-button">EDIT
+                            </a>
+                        </div>
+
+                    </div>
+                    <hr>
+                    <div class="panel-body" ng-non-bindable>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <span class="info-label">
+                                    Address:
+                                </span>
+                            </div>
+                            <div class="col-sm-8">
+                                <span class="info-key truncate-info-item">
+                                    {{model.Street}}
+                                </span>
+                                <br>
+                                <span class="info-key">
+                                    {{model.City}} {{model.State}} {{model.Zip}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <span class="info-label">
+                                    Phone:
+                                </span>
+                            </div>
+                            <div class="col-sm-8">
+                                <span class="info-key">
+                                    {{model.HomePhone}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <span class="info-label">
+                                    Email:
+                                </span>
+                            </div>
+                            <div class="col-sm-8">
+                                <span class="info-key truncate-info-item">
+                                    {{model.Email}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <span class="info-label">
+                                    CC Status:
+                                </span>
+                            </div>
+                            <div class="col-sm-8">
+                                <span class="info-key">
+                                    {{model.CreditStatus}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <span class="info-label">
+                                    Proposal:
+                                </span>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="info-key">
+                                    {{model.ProposalStatus}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ui-gmap-windows>
+        </ui-gmap-markers>
+    </ui-gmap-google-map>
+    <div id="map-key" class="container-fluid">
+        <div class="map-key-left col-sm-10">
+            <img src="assets/images/prospectpin.png" class="inline-block"/>
+            <span>Prospects</span>
+        </div>
+        <div class="map-key-right col-sm-2">
+            <button type="button"
+                    ng-if="$state.includes('homepage')"
+                    class="btn btn-default pull-right"
+                    ng-click="homeownerMap.navigateToFullMap()">
+                <img src="assets/images/mapexpand.png"/>
+            </button>
+            <button type="button"
+                    ng-if="$state.includes('map')"
+                    class="btn btn-default pull-right"
+                    ng-click="homeownerMap.navigateToHomepage()">
+                <img src="assets/images/Minimize-icon.png"/>
+            </button>
+        </div>
+    </div>
+</div>

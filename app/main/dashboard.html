@@ -1,0 +1,101 @@
+<div class="container-fluid"
+     id="dashboard">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="nav-pills-container">
+                <ul class="nav nav-pills">
+
+                    <li role="presentation"
+                        ng-class="{ active: $state.includes('homeowners') }">
+                        <a ui-sref="homeowners">
+                            Prospects
+                        </a>
+                    </li>
+                    <!--li role="presentation"
+                        ng-class="{ active: $state.includes('map') }">
+                        <a ui-sref="map"
+                           ng-class="{ active: $state.includes('contacts') }">
+                            Map View
+                        </a>
+                    </li-->
+                </ul>
+
+                <div class="search-bar-container" style="float: right">
+                    <div class="input-group leadSearch"
+                         ng-if="$state.includes('homeowners')">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-search"
+                                  aria-hidden="true"></span>
+                        </span>
+                        <input ng-model="dashboardController.searchText"
+                               id="leadSearchInput"
+                               type="text"
+                               class="form-control"
+                               placeholder="Start typing to search">
+                    </div>
+                </div>
+                <div class="dropdown" id="SalesPeopleMenu" style="float: right; margin-top: 1%;" ng-show="userRole === 'PartnerAdmin'">
+                    <a id="SalesPeopleMenu"
+                       style="padding-left: 10px; padding-right: 10px;"
+                       role="button"
+                       data-toggle="dropdown">
+                        <i class="fa fa-user"></i>
+                        <span class="menu-label-text" style="font-size:large">Sales Rep</span>
+                        <span class="caret"></span>
+                    </a>
+                    <!--label style="color: white;" ng-repeat="salesPerson in listOfSalesPeople">
+                        <input type="checkbox" name="selectedSalesPeople[]" value="{{salesPerson}}"> {{salesPerson}}
+                    </label-->
+                    <ul class="dropdown-menu" role="menu" style="border-radius:5%">
+                        <li class="header" style="text-align:center; background-color:lightgrey">Sales Reps Selected</li>
+                        <li ng-repeat="salesPerson in listOfSalesPeople" style="margin-left:10%">
+                            <!--input type="checkbox" value="{{salesPerson}}"-->
+                            <input type="checkbox" name="salesPerson" ng-checked="listOfSalesPeople.indexOf(salesPerson) > -1" ng-click="editSelectedSalesPeople(salesPerson);
+                                    $event.stopPropagation();">{{salesPerson}}
+                        </li>
+                    </ul>                    
+                </div>
+                <div class="dropdown" id="StatusMenu" style="float: right; margin-top: 1%;" ng-show="userRole === 'SalesPerson'">
+                    <a id="StatusMenu"
+                       style="padding-left: 10px; padding-right: 10px;"
+                       role="button"
+                       data-toggle="dropdown">
+                        <i class="fa fa-user"></i>
+                        <span class="menu-label-text" style="font-size:large">Status</span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" style="border-radius:5%">
+                        <li class="header" style="text-align:center; background-color:lightgrey">Status Selected</li>
+                        <li ng-repeat="status in listOfStatus" style="margin-left:10%">
+                            <input type="checkbox" name="status" ng-checked="listOfStatus.indexOf(status) > -1" ng-click="editSelectedStatus(status);
+                                    $event.stopPropagation();">{{status}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="dropdown" id="PartnerMenu" style="float: right; margin-top: 1%;" ng-show="userRole === 'SalesPerson'">
+                    <a id="PartnerMenu"
+                       style="padding-left: 10px; padding-right: 10px;"
+                       role="button"
+                       data-toggle="dropdown">
+                        <i class="fa fa-user"></i>
+                        <span class="menu-label-text" style="font-size:large">Partner</span>
+                        <span class="caret"></span>
+                    </a>
+                    <!--label style="color: white;" ng-repeat="salesPerson in listOfSalesPeople">
+                        <input type="checkbox" name="selectedSalesPeople[]" value="{{salesPerson}}"> {{salesPerson}}
+                    </label-->
+
+                    <ul class="dropdown-menu" role="menu" style="border-radius:5%">
+                        <li class="header" style="text-align:center; background-color:lightgrey">Partners Selected</li>
+                        <li ng-repeat="partner in listOfPartners" style="margin-left:10%">
+                            <!--input type="checkbox" value="{{salesPerson}}"-->
+                            <input type="checkbox" name="partner" ng-checked="listOfPartners.indexOf(partner) > -1" ng-click="editSelectedPartners(partner);
+                                    $event.stopPropagation();">{{partner}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ui-view/>
+</div>

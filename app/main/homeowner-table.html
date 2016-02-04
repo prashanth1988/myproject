@@ -1,0 +1,36 @@
+<div ng-show="homeownerList.loading" class="loadingImg">
+</div>
+<div class="panel panel-default" ng-hide="homeownerList.loading">
+<table class="homeowner-list-table table table-hover table-striped table-bordered">
+    <thead>
+    <tr>
+        <th><a class = "{{homeownerList.classForDateCreated}}" href="" ng-click="homeownerList.order('DateCreated')"><span>Date Created</span>
+                <span class="caret"></span></a></th>
+        <th><a class = "{{homeownerList.classForStreet}}" href="" ng-click="homeownerList.order('TransId')">Opp No.</a></th>
+        <th><a class = "{{homeownerList.classForState}}" href="" ng-click="homeownerList.order('StateCode')">State</a></th>
+        <th><a class = "{{homeownerList.classForCity}}" href="" ng-click="homeownerList.order('Suburb')">Suburb</a></th>
+        <th><a class = "{{homeownerList.classForFN}}" href="" ng-click="homeownerList.order('FirstName')">Customer</a></th>
+        <th><a class = "{{homeownerList.classForHomePhone}}" href="" ng-click="homeownerList.order('HomePhone')">Phone #</a></th>
+        <th><a class = "{{homeownerList.classForLeadSource}}" href="" ng-click="homeownerList.order('LeadSource')">Lead Source</a></th>
+        <th><a class = "{{homeownerList.classForExpCloseDate}}" href="" ng-click="homeownerList.order('ExpCloseDate')">Exp Close Date</a></th>
+        <th><a class = "{{homeownerList.classForStatus}}" href="" ng-click="homeownerList.order('Status')">Status</a></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="homeownerVM in homeownerList.viewModels | limitTo: ($state.includes('homepage') ? 5 : homeownerList.viewModels.length ) | filter:dashboardController.searchText"
+        ng-click="homeownerList.editHomeownerInModal(homeownerVM)" ng-show="listOfSelectedSalesPeople.indexOf(homeownerVM.model.SalesPersonId) !== -1 || listOfSelectedPartners.indexOf(homeownerVM.model.PartnerId) !== -1 && listOfSelectedStatus.indexOf(homeownerVM.model.Status) !== -1">
+        <td>{{homeownerVM.model.DateCreated}}</td>
+        <td>{{homeownerVM.model.TransId}}</td>
+        <td>{{homeownerVM.model.StateCode}}</td>
+        <td>{{homeownerVM.model.Suburb}}</td>
+        <td>{{homeownerVM.model.FirstName}}  {{homeownerVM.model.LastName}}</td>
+        <td>
+            <div class="fixed-width-contents">{{homeownerVM.model.Phone}}</div>
+        </td>
+        <td>{{homeownerVM.model.LeadSource}}</td>
+        <td>{{homeownerVM.model.ExpCloseDate}}</td>
+        <td>{{homeownerVM.model.Status}}</td>
+    </tr>
+    </tbody>
+</table>
+</div>
